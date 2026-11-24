@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>第三幕 · 一封签了名的信</title>
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/act-3.css" />
+</head>
+<body>
+  <div class="stage" id="stage">
+    <main class="scene act3" data-cue="0">
+      <div class="layer bg a3-room">
+        <div class="a3-wall"></div>
+        <div class="a3-wall-shadow"></div>
+        <div class="a3-window">
+          <div class="a3-window-view">
+            <div class="a3-night"></div>
+            <div class="a3-window-glow"></div>
+            <div class="a3-window-trees"></div>
+            <canvas class="a3-snow" id="snowfield"></canvas>
+            <div class="a3-frost"></div>
+          </div>
+          <div class="a3-window-frame"></div>
+          <div class="a3-window-sill"></div>
+        </div>
+        <div class="a3-lamp">
+          <div class="a3-lamp-glow"></div>
+          <div class="a3-lamp-cord"></div>
+          <div class="a3-lamp-shade"></div>
+          <div class="a3-lamp-bulb"></div>
+        </div>
+        <div class="a3-lightcone"></div>
+        <div class="a3-desk"></div>
+        <div class="a3-desk-edge"></div>
+      </div>
+
+      <div class="a3-letter-wrap" aria-hidden="true">
+        <div class="a3-paper sheet">
+          <div class="a3-paper-grain"></div>
+          <div class="a3-paper-head">
+            <div class="a3-paper-to">
+              <span class="a3-paper-kicker">TO / THE SECOND MINISTRY OF MACHINE BUILDING</span>
+              <span class="a3-paper-address">致 二机部领导</span>
+            </div>
+            <div class="a3-paper-date">1960 · 冬<br />杜布纳</div>
+          </div>
+          <div class="a3-paper-rule top"></div>
+          <div class="a3-paper-title">决心书</div>
+          <div class="a3-paper-abstract">
+            <span></span><span></span><span></span><span></span><span></span>
+          </div>
+          <div class="a3-resolution">
+            <div class="a3-res-lines">
+              <span class="a3-res-line" data-line="0"></span>
+              <span class="a3-res-line" data-line="1"></span>
+              <span class="a3-res-line" data-line="2"></span>
+              <span class="a3-res-line" data-line="3"></span>
+              <span class="a3-caret"></span>
+            </div>
+            <div class="a3-resolution-note">联名信 · 一九六〇年冬 · 杜布纳</div>
+          </div>
+          <div class="a3-signatures-block">
+            <div class="a3-signatures-label">
+              <span>联 名 签 署</span>
+              <span>二十余人</span>
+            </div>
+            <svg class="a3-signatures" id="signatures" viewBox="0 0 820 156" preserveAspectRatio="xMidYMid meet"></svg>
+          </div>
+          <div class="a3-paper-foot">
+            <span>DUBNA · 1960</span>
+            <span>PAGE 01 / 01</span>
+          </div>
+          <div class="a3-paper-stamp">二机部<br />收</div>
+        </div>
+        <div class="a3-pen" aria-hidden="true">
+          <span class="a3-pen-body"></span>
+          <span class="a3-pen-clip"></span>
+          <span class="a3-pen-nib"></span>
+        </div>
+      </div>
+
+      <div class="a3-beijing" aria-hidden="true">
+        <div class="a3-beijing-rule"></div>
+        <div class="a3-beijing-eyebrow">THE RETURN · 1961</div>
+        <div class="a3-beijing-year">1961</div>
+        <div class="a3-beijing-city">北京</div>
+        <div class="a3-beijing-foot">春天 · 回国</div>
+        <div class="a3-beijing-line"></div>
+      </div>
+
+      <canvas class="fx-canvas a3-dust" id="dustfield"></canvas>
+      <div class="a3-warmwash"></div>
+
+      <header class="act-head a3-head">
+        <div class="act-index">ACT III · 第三幕</div>
+        <h1 class="act-title">一封签了名的信</h1>
+        <div class="act-place">1960 · 冬 · 杜布纳</div>
+      </header>
+
+      <div class="slate-meta">
+        DUBNA / WINTER<br />
+        23:10 · 台灯<span class="red-line"></span>
+      </div>
+
+      <div class="scene-footer">
+        <span>《署名》· 致知科学社</span>
+        <span>“国家等不了十年。”</span>
+      </div>
+
+      <div class="a3-endfade"></div>
+      <span class="reg-mark tl"></span>
+      <span class="reg-mark tr"></span>
+      <span class="reg-mark bl"></span>
+      <span class="reg-mark br"></span>
+      <div class="grain"></div>
+      <div class="vignette"></div>
+      <div class="film-edge"></div>
+    </main>
+  </div>
+
+  <script src="../js/scene-core.js"></script>
+  <script src="../js/act-3.js"></script>
+</body>
+</html>

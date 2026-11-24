@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>《署名》· 舞台放映器</title>
+  <link rel="stylesheet" href="css/stage.css" />
+</head>
+<body>
+  <main class="projector" id="projector">
+    <div class="screen" id="screen">
+      <iframe class="scene-frame" data-act="0" data-title="预演" src="scenes/preshow.html?embedded=1&amp;hud=0" title="预演" allow="autoplay"></iframe>
+      <iframe class="scene-frame" data-act="1" data-title="三十七页" src="scenes/act-1.html?embedded=1&amp;hud=0" title="第一幕 三十七页" allow="autoplay"></iframe>
+      <iframe class="scene-frame" data-act="2" data-title="消息" src="scenes/act-2.html?embedded=1&amp;hud=0" title="第二幕 消息" allow="autoplay"></iframe>
+      <iframe class="scene-frame" data-act="3" data-title="一封签了名的信" src="scenes/act-3.html?embedded=1&amp;hud=0" title="第三幕 一封签了名的信" allow="autoplay"></iframe>
+      <iframe class="scene-frame" data-act="4" data-title="第九次" src="scenes/act-4.html?embedded=1&amp;hud=0" title="第四幕 第九次" allow="autoplay"></iframe>
+      <iframe class="scene-frame" data-act="5" data-title="署名" src="scenes/act-5.html?embedded=1&amp;hud=0" title="第五幕 署名" allow="autoplay"></iframe>
+    </div>
+
+    <div class="transition-veil" id="transitionVeil"></div>
+    <div class="blackout-veil" id="blackoutVeil"></div>
+
+    <div class="operator-hud" id="hud">
+      <span class="hud-dot"></span>
+      <span class="hud-act" id="hudAct">00 / 预演</span>
+      <span class="hud-rule"></span>
+      <span class="hud-cue" id="hudCue">CUE — / —</span>
+      <span class="hud-rule"></span>
+      <span class="hud-hint" id="hudHint">SPACE 下一提示 · 1–5 切幕 · B 黑场 · F 全屏</span>
+    </div>
+
+    <section class="intro" id="intro">
+      <div class="intro-bg"></div>
+      <div class="intro-grain"></div>
+      <div class="intro-vignette"></div>
+      <header class="intro-top">
+        <div class="intro-brand">致知科学社 · 2026 社团风采展</div>
+        <div class="intro-status">
+          <span id="loadStatus">预载场景 · 0 / 6</span>
+          <span class="status-pulse"></span>
+        </div>
+      </header>
+
+      <div class="intro-body">
+        <div class="intro-kicker"><span></span>STAGE PROJECTION · 509</div>
+        <h1 class="intro-title">署名</h1>
+        <div class="intro-en">SIGNATURE</div>
+        <div class="intro-line"></div>
+        <p class="intro-quote">他把自己的名字从论文上摘下来，<br />写进了国家的名单里。</p>
+      </div>
+
+      <div class="intro-actions">
+        <button class="start-button" id="startButton" type="button" disabled>
+          <span class="start-index">01</span>
+          <span class="start-copy">
+            <strong id="startLabel">正在预载</strong>
+            <small>点击后进入全屏放映 · 按 F 可随时切换</small>
+          </span>
+          <span class="start-arrow">→</span>
+        </button>
+        <div class="intro-keys">
+          <div><b>0–5</b><span>切场</span></div>
+          <div><b>SPACE / →</b><span>下一提示</span></div>
+          <div><b>←</b><span>上一提示</span></div>
+          <div><b>B</b><span>黑场</span></div>
+          <div><b>R</b><span>重播本幕</span></div>
+        </div>
+      </div>
+
+      <footer class="intro-foot">
+        <span>五幕话剧 · 约 8 分钟</span>
+        <span>1920 × 1080 / 16:9</span>
+        <span>请将手机调至静音</span>
+      </footer>
+    </section>
+
+    <div class="loading-line" id="loadingLine"></div>
+    <noscript><div class="noscript">需要启用 JavaScript 才能运行舞台放映器。</div></noscript>
+  </main>
+  <script src="js/stage.js"></script>
+</body>
+</html>

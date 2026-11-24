@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>第二幕 · 消息</title>
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/act-2.css" />
+</head>
+<body>
+  <div class="stage" id="stage">
+    <main class="scene act2" data-cue="0">
+      <div class="layer bg a2-room">
+        <div class="a2-wall"></div>
+        <div class="a2-wallpaper"></div>
+        <div class="a2-window">
+          <div class="a2-window-view">
+            <div class="a2-dusk-sky"></div>
+            <div class="a2-leaves"></div>
+            <div class="a2-leaves far"></div>
+            <div class="a2-window-reflection"></div>
+          </div>
+          <div class="a2-window-frame"></div>
+          <div class="a2-window-sill"></div>
+        </div>
+        <div class="a2-lightshaft"></div>
+        <div class="a2-wall-shadow"></div>
+        <div class="a2-tabletop"></div>
+        <div class="a2-cup">
+          <span class="a2-cup-handle"></span>
+          <span class="a2-cup-steam"></span>
+        </div>
+        <div class="a2-desk-papers"></div>
+      </div>
+
+      <div class="a2-broadcast">
+        <div class="a2-broadcast-date">1959<span>.06</span></div>
+        <div class="a2-tass">
+          <span class="a2-tass-cn">塔斯社</span>
+          <span class="a2-tass-en">TELEGRAPH AGENCY OF THE SOVIET UNION</span>
+        </div>
+        <div class="a2-news">
+          <div class="a2-news-kicker">莫斯科 · 一九五九年六月</div>
+          <h2 class="a2-news-head">苏联政府决定<br />暂停执行国防新技术协定</h2>
+          <div class="a2-news-cols">
+            <p>苏联政府决定，暂停执行一九五七年十月十五日签订的关于国防新技术的协定。</p>
+            <p>不再向中国提供原子弹样品和技术资料。</p>
+          </div>
+          <div class="a2-news-rule"></div>
+          <div class="a2-news-foot">TASS · MOSCOW · 1959.6</div>
+        </div>
+        <div class="a2-wave-box">
+          <canvas class="a2-wave" id="wavefield"></canvas>
+          <div class="a2-wave-labels"><span>30</span><span>60</span><span>90</span></div>
+        </div>
+      </div>
+
+      <div class="a2-stamp-wrap" aria-hidden="true">
+        <div class="a2-stamp">
+          <span>暂停</span><span>援助</span>
+        </div>
+        <div class="a2-stamp-ink"></div>
+        <div class="a2-stamp-note">ТАСС · 1959.6 · МОСКВА</div>
+      </div>
+
+      <div class="a2-radio" aria-hidden="true">
+        <div class="a2-radio-shadow"></div>
+        <div class="a2-radio-glow"></div>
+        <img class="a2-radio-cutout" src="../assets/img/vintage-radio-cutout.png" alt="一台老式木壳收音机" />
+        <div class="a2-radio-waves" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+
+      <div class="a2-letter" aria-hidden="true">
+        <div class="a2-letter-paper sheet">
+          <div class="a2-letter-inner">
+            <div class="a2-letter-head">
+              <span>ПИСЬМО</span>
+              <span>家书 · 1959</span>
+            </div>
+            <div class="a2-letter-rule"></div>
+            <div class="a2-letter-line" id="letterLine">
+              <span id="letterText"></span><span class="a2-caret" id="caret"></span>
+            </div>
+            <div class="a2-letter-postmark">DUBNA<br />1959</div>
+            <div class="a2-letter-foot">DUBNA · SUMMER 1959</div>
+          </div>
+        </div>
+      </div>
+
+      <canvas class="fx-canvas a2-dust" id="dustfield"></canvas>
+      <div class="a2-warmwash"></div>
+
+      <header class="act-head a2-head">
+        <div class="act-index">ACT II · 第二幕</div>
+        <h1 class="act-title">消息</h1>
+        <div class="act-place">1959.6 · 杜布纳</div>
+      </header>
+
+      <div class="slate-meta">
+        TASS / MOSCOW<br />
+        19:40 · 收音机<span class="red-line"></span>
+      </div>
+
+      <div class="scene-footer">
+        <span>《署名》· 致知科学社</span>
+        <span>“签了名，就是把自己交出去。”</span>
+      </div>
+
+      <div class="a2-endfade"></div>
+      <span class="reg-mark tl"></span>
+      <span class="reg-mark tr"></span>
+      <span class="reg-mark bl"></span>
+      <span class="reg-mark br"></span>
+      <div class="grain"></div>
+      <div class="vignette"></div>
+      <div class="film-edge"></div>
+    </main>
+  </div>
+
+  <script src="../js/scene-core.js"></script>
+  <script src="../js/act-2.js"></script>
+</body>
+</html>

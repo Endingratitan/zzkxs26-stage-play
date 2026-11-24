@@ -1,0 +1,931 @@
+/* 第四幕 · 第九次 — chalk, calculation, the erased number */
+
+body {
+  background: #040504;
+}
+
+.act4 {
+  --board: #101914;
+  --board-deep: #0a110e;
+  --chalk: #e3e1d2;
+  --chalk-dim: #b6b7a8;
+  --ember: #d0783e;
+  background: #040504;
+}
+
+/* ---------- room ---------- */
+
+.a4-room {
+  background:
+    radial-gradient(ellipse at 85% 78%, rgba(189, 104, 43, 0.14), transparent 30%),
+    radial-gradient(ellipse at 36% 10%, rgba(113, 131, 112, 0.09), transparent 38%),
+    linear-gradient(108deg, #060907, #090e0b 54%, #080906);
+  overflow: hidden;
+}
+
+.a4-wall {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.55), transparent 27%, transparent 62%, rgba(0, 0, 0, 0.45)),
+    linear-gradient(180deg, #0a0e0b, #070a08 66%, #040504);
+}
+.a4-wall::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(89deg, transparent 0 71px, rgba(213, 204, 184, 0.012) 72px, transparent 73px),
+    url("../assets/img/paper.svg");
+  background-size: auto, 680px;
+  opacity: 0.28;
+  mix-blend-mode: soft-light;
+}
+.a4-wall-shadow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 47%, transparent 18%, rgba(0, 0, 0, 0.35) 66%, rgba(0, 0, 0, 0.62));
+}
+.a4-floor {
+  position: absolute;
+  left: -5%;
+  right: -5%;
+  bottom: -12%;
+  height: 25%;
+  background: linear-gradient(to top, #030403, rgba(5, 7, 5, 0.7) 56%, transparent 100%);
+  filter: blur(4px);
+}
+
+/* ---------- blackboard ---------- */
+
+.a4-board {
+  position: absolute;
+  left: 68px;
+  top: 224px;
+  width: 1784px;
+  height: 790px;
+  z-index: 9;
+  transform-origin: 58% 54%;
+  transition: transform 2.8s var(--ease-soft);
+}
+.a4-board-frame {
+  position: absolute;
+  inset: -18px;
+  border: 18px solid #241b12;
+  background:
+    linear-gradient(100deg, rgba(255, 217, 158, 0.05), transparent 18%),
+    linear-gradient(180deg, #2c2115, #130e08 54%, #0d0906);
+  box-shadow:
+    inset 0 0 0 1px rgba(229, 188, 123, 0.12),
+    0 48px 100px rgba(0, 0, 0, 0.48);
+}
+.a4-board-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(96deg, transparent 0 68px, rgba(248, 201, 135, 0.026) 69px, transparent 70px 140px);
+  opacity: 0.7;
+  pointer-events: none;
+}
+.a4-board-inner {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 19% 20%, rgba(195, 205, 178, 0.065), transparent 34%),
+    radial-gradient(ellipse at 78% 74%, rgba(150, 170, 147, 0.048), transparent 34%),
+    radial-gradient(ellipse at 72% 36%, rgba(196, 139, 83, 0.045), transparent 30%),
+    linear-gradient(160deg, #121c16, #0b130f 56%, #0b110e);
+  box-shadow:
+    inset 0 0 70px rgba(0, 0, 0, 0.46),
+    inset 0 0 200px rgba(0, 0, 0, 0.25);
+}
+.a4-board-inner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    url("../assets/img/paper.svg"),
+    repeating-linear-gradient(91deg, transparent 0 272px, rgba(233, 232, 213, 0.018) 273px, transparent 274px),
+    repeating-linear-gradient(1deg, transparent 0 187px, rgba(233, 232, 213, 0.012) 188px, transparent 189px);
+  background-size: 680px, auto, auto;
+  mix-blend-mode: soft-light;
+  opacity: 0.42;
+  pointer-events: none;
+}
+.a4-board-inner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(3deg, transparent 67%, rgba(210, 206, 188, 0.03) 68%, transparent 69%),
+    linear-gradient(176deg, transparent 28%, rgba(210, 206, 188, 0.025) 29%, transparent 30%);
+  opacity: 0.8;
+  pointer-events: none;
+}
+.a4-board-grain {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  opacity: 0.27;
+  mix-blend-mode: soft-light;
+  background-image: url("../assets/img/grain.svg");
+  background-size: 260px;
+}
+
+/* ---------- chalk writing ---------- */
+
+.a4-chalk-head {
+  position: absolute;
+  left: 48px;
+  right: 50px;
+  top: 28px;
+  z-index: 3;
+  display: flex;
+  justify-content: space-between;
+  color: rgba(222, 222, 207, 0.38);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+}
+.a4-chalk-head span:last-child {
+  color: rgba(231, 212, 176, 0.28);
+}
+
+.a4-tallies {
+  position: absolute;
+  right: 50px;
+  top: 72px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  z-index: 5;
+  transition:
+    opacity 1.6s ease,
+    filter 1.6s ease;
+}
+.a4-tallies-label {
+  margin-right: 13px;
+  color: rgba(221, 216, 198, 0.48);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.17em;
+}
+.a4-tally {
+  display: block;
+  width: 3px;
+  height: 30px;
+  background: rgba(236, 231, 210, 0.56);
+  border-radius: 1px;
+  transform: rotate(1.5deg);
+  filter: url(#a4-chalk);
+  box-shadow: 0 0 2px rgba(255, 255, 255, 0.1);
+}
+.a4-tally:nth-child(2n) {
+  transform: rotate(-2.5deg) translateY(1px);
+  height: 27px;
+}
+.a4-tally.last {
+  height: 35px;
+  background: rgba(211, 161, 108, 0.78);
+  box-shadow: 0 0 12px rgba(206, 130, 69, 0.26);
+}
+
+.a4-number-grid {
+  position: absolute;
+  left: 49px;
+  top: 119px;
+  width: 842px;
+  height: 385px;
+  z-index: 3;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 13px 31px;
+  overflow: hidden;
+  opacity: 0.62;
+  color: rgba(216, 219, 202, 0.56);
+  font-family: var(--mono);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: 0.05em;
+  filter: url(#a4-chalk);
+  transition:
+    opacity 1.6s ease,
+    filter 1.6s ease;
+}
+.a4-number-grid span {
+  display: block;
+  opacity: 0.65;
+  white-space: nowrap;
+}
+.a4-number-grid span:nth-child(3n) {
+  opacity: 0.33;
+}
+.a4-number-grid span:nth-child(5n) {
+  opacity: 0.24;
+}
+.a4-number-grid span:nth-child(11n) {
+  color: rgba(229, 198, 160, 0.58);
+  opacity: 0.65;
+}
+
+.a4-formula {
+  position: absolute;
+  left: 50px;
+  bottom: 122px;
+  z-index: 4;
+  color: rgba(231, 228, 209, 0.62);
+  font-family: "Times New Roman", var(--serif);
+  font-size: 58px;
+  font-style: italic;
+  letter-spacing: 0.03em;
+  text-shadow: 0 0 2px rgba(255, 255, 255, 0.14);
+  filter: url(#a4-chalk);
+}
+.a4-formula sub {
+  font-size: 28px;
+  font-style: normal;
+}
+.a4-formula-sub {
+  position: absolute;
+  left: 55px;
+  bottom: 85px;
+  z-index: 4;
+  color: rgba(210, 207, 190, 0.26);
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+}
+
+.a4-circled {
+  position: absolute;
+  right: 178px;
+  top: 182px;
+  width: 430px;
+  height: 290px;
+  z-index: 5;
+  color: rgba(235, 230, 211, 0.68);
+  transition:
+    opacity 1.8s var(--ease-soft),
+    filter 1.8s var(--ease-soft),
+    transform 2s var(--ease-soft);
+}
+.a4-circle {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  transform: rotate(-4deg);
+}
+.a4-circle path {
+  fill: none;
+  stroke: rgba(211, 164, 128, 0.82);
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  filter: url(#a4-chalk);
+  animation: a4-circle-draw 2.8s var(--ease-soft) 0.5s forwards;
+}
+.a4-data {
+  position: absolute;
+  left: 101px;
+  top: 61px;
+  color: rgba(229, 214, 189, 0.72);
+  font-family: "Times New Roman", var(--serif);
+  font-size: 142px;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  filter: url(#a4-chalk);
+  text-shadow: 0 0 3px rgba(255, 255, 255, 0.12);
+}
+.a4-data sub {
+  font-size: 45px;
+  letter-spacing: 0;
+}
+.a4-data-label {
+  position: absolute;
+  left: 94px;
+  top: 211px;
+  color: rgba(212, 207, 188, 0.46);
+  font-family: var(--serif);
+  font-size: 15px;
+  letter-spacing: 0.22em;
+  filter: url(#a4-chalk);
+}
+.a4-data-note {
+  position: absolute;
+  left: 95px;
+  top: 237px;
+  color: rgba(212, 207, 188, 0.28);
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.15em;
+}
+.a4-smudge {
+  position: absolute;
+  left: 51px;
+  top: 185px;
+  width: 312px;
+  height: 34px;
+  background: linear-gradient(90deg, transparent, rgba(212, 207, 190, 0.09) 22%, rgba(212, 207, 190, 0.14) 50%, rgba(212, 207, 190, 0.06) 77%, transparent);
+  filter: blur(8px);
+  opacity: 0;
+  transform: rotate(-2deg);
+}
+
+.a4-chalk-note {
+  position: absolute;
+  right: 445px;
+  bottom: 98px;
+  z-index: 4;
+  color: rgba(212, 209, 192, 0.27);
+  font-family: var(--serif);
+  font-size: 13px;
+  letter-spacing: 0.2em;
+  transform: rotate(-1.5deg);
+  filter: url(#a4-chalk);
+}
+.a4-chalk-lines {
+  position: absolute;
+  left: 50%;
+  bottom: 149px;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 380px;
+  opacity: 0.26;
+  transform: rotate(0.6deg);
+}
+.a4-chalk-lines span {
+  height: 1px;
+  background: rgba(220, 218, 201, 0.45);
+  filter: url(#a4-chalk);
+}
+.a4-chalk-lines span:nth-child(2) {
+  width: 78%;
+}
+.a4-chalk-lines span:nth-child(3) {
+  width: 91%;
+}
+.a4-chalk-lines span:nth-child(4) {
+  width: 48%;
+}
+
+.a4-maxpower {
+  position: absolute;
+  left: 173px;
+  top: 337px;
+  z-index: 9;
+  color: rgba(239, 235, 216, 0.93);
+  font-family: var(--serif);
+  font-size: 254px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.05em;
+  opacity: 0;
+  transform: translateY(16px) rotate(-0.6deg);
+  filter: url(#a4-chalk);
+  text-shadow:
+    0 0 2px rgba(255, 255, 255, 0.3),
+    0 0 32px rgba(225, 229, 209, 0.1);
+  white-space: nowrap;
+  clip-path: inset(0 100% 0 0);
+  transition:
+    opacity 1.1s var(--ease-soft),
+    transform 1.5s var(--ease-out);
+}
+.a4-maxpower::after {
+  content: "";
+  position: absolute;
+  left: 4%;
+  right: 7%;
+  bottom: -28px;
+  height: 3px;
+  background: rgba(232, 228, 211, 0.34);
+  filter: url(#a4-chalk);
+  transform: rotate(-0.3deg);
+}
+
+.a4-eraser {
+  position: absolute;
+  right: 82px;
+  top: 336px;
+  z-index: 12;
+  width: 230px;
+  height: 79px;
+  opacity: 0;
+  transform: translate3d(300px, -37px, 0) rotate(7deg);
+  filter: drop-shadow(0 20px 17px rgba(0, 0, 0, 0.42));
+  pointer-events: none;
+}
+.a4-eraser-top {
+  position: absolute;
+  inset: 0 0 19px;
+  border-radius: 7px 7px 4px 4px;
+  background:
+    linear-gradient(92deg, rgba(255, 224, 167, 0.1), transparent 24%),
+    linear-gradient(180deg, #6e4c2b 0%, #3e2918 44%, #24170d 100%);
+  border: 1px solid rgba(221, 173, 105, 0.14);
+  box-shadow:
+    inset 0 1px 1px rgba(255, 228, 177, 0.14),
+    inset 0 -3px 5px rgba(0, 0, 0, 0.26);
+}
+.a4-eraser-top::after {
+  content: "";
+  position: absolute;
+  left: 17px;
+  right: 17px;
+  top: 15px;
+  height: 1px;
+  background: rgba(249, 206, 145, 0.12);
+}
+.a4-eraser-felt {
+  position: absolute;
+  left: 3px;
+  right: 3px;
+  bottom: 0;
+  height: 22px;
+  border-radius: 0 0 8px 8px;
+  background:
+    repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.4) 0 5px, rgba(88, 82, 68, 0.34) 6px 9px, rgba(0, 0, 0, 0.38) 10px 14px),
+    #292a24;
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.35);
+}
+
+.a4-erased-space {
+  position: absolute;
+  left: 1090px;
+  top: 238px;
+  width: 270px;
+  height: 150px;
+  z-index: 8;
+  background: radial-gradient(ellipse at center, rgba(15, 24, 19, 0.96), transparent 70%);
+  opacity: 0;
+  filter: blur(9px);
+  transition: opacity 1.4s ease 1.4s;
+}
+.a4-chalk-dust-stain {
+  position: absolute;
+  right: 281px;
+  top: 477px;
+  width: 330px;
+  height: 60px;
+  z-index: 7;
+  background: radial-gradient(ellipse at center, rgba(216, 212, 193, 0.12), transparent 70%);
+  filter: blur(13px);
+  opacity: 0;
+  transform: rotate(-2deg);
+  transition: opacity 1.1s ease 1.2s;
+}
+
+/* ---------- stove ---------- */
+
+.a4-stove {
+  position: absolute;
+  right: 85px;
+  bottom: -2px;
+  width: 286px;
+  height: 420px;
+  z-index: 22;
+  pointer-events: none;
+}
+.a4-stove-glow {
+  position: absolute;
+  left: -236px;
+  top: -22px;
+  width: 680px;
+  height: 620px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(224, 107, 38, 0.25), transparent 66%);
+  filter: blur(48px);
+  animation: stove-glow 8s ease-in-out infinite;
+}
+.a4-stove-body {
+  position: absolute;
+  left: 30px;
+  bottom: 0;
+  width: 228px;
+  height: 331px;
+  border-radius: 32px 32px 17px 17px;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.5), transparent 16%, rgba(255, 201, 130, 0.1) 46%, rgba(0, 0, 0, 0.5)),
+    repeating-linear-gradient(0deg, #1c1915 0 18px, #100e0c 19px 36px),
+    linear-gradient(180deg, #2a241d, #0c0a08 68%);
+  border: 1px solid rgba(224, 169, 99, 0.09);
+  box-shadow:
+    inset 0 2px 3px rgba(255, 238, 196, 0.1),
+    inset 0 0 34px rgba(0, 0, 0, 0.48),
+    0 30px 50px rgba(0, 0, 0, 0.5),
+    0 0 26px rgba(211, 108, 43, 0.08);
+}
+.a4-stove-body::before {
+  content: "";
+  position: absolute;
+  left: 19px;
+  right: 19px;
+  top: 21px;
+  height: 1px;
+  background: rgba(239, 190, 119, 0.11);
+}
+.a4-stove-top {
+  position: absolute;
+  left: -11px;
+  right: -11px;
+  top: -14px;
+  height: 22px;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #30281f, #0b0907);
+  box-shadow: 0 5px 13px rgba(0, 0, 0, 0.4);
+}
+.a4-stove-door {
+  position: absolute;
+  left: 36px;
+  right: 36px;
+  top: 147px;
+  height: 112px;
+  border-radius: 10px;
+  background:
+    radial-gradient(ellipse at 50% 88%, rgba(238, 127, 45, 0.36), transparent 48%),
+    linear-gradient(180deg, #1b150f, #090805);
+  border: 1px solid rgba(218, 160, 91, 0.24);
+  box-shadow:
+    inset 0 0 25px rgba(0, 0, 0, 0.8),
+    0 0 30px rgba(218, 109, 40, 0.18);
+}
+.a4-stove-door::before {
+  content: "";
+  position: absolute;
+  left: 26px;
+  right: 26px;
+  top: 38px;
+  height: 4px;
+  background: rgba(242, 126, 44, 0.64);
+  box-shadow:
+    0 0 13px rgba(236, 112, 38, 0.65),
+    0 7px 18px rgba(211, 88, 30, 0.26);
+}
+.a4-stove-vent {
+  position: absolute;
+  left: 27px;
+  right: 27px;
+  bottom: 28px;
+  height: 6px;
+  background: repeating-linear-gradient(90deg, #050504 0 11px, rgba(200, 100, 44, 0.28) 12px 14px, #050504 15px 26px);
+  opacity: 0.58;
+}
+.a4-stove-leg {
+  position: absolute;
+  bottom: -18px;
+  width: 22px;
+  height: 41px;
+  background: linear-gradient(90deg, #0d0a07, #2b2117, #070604);
+  border-radius: 0 0 5px 5px;
+}
+.a4-stove-leg.left {
+  left: 33px;
+}
+.a4-stove-leg.right {
+  right: 33px;
+}
+.a4-embers {
+  position: absolute;
+  left: -105px;
+  top: -126px;
+  width: 420px;
+  height: 540px;
+  z-index: 2;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  opacity: 0.8;
+}
+.a4-stove-light {
+  position: absolute;
+  right: 90px;
+  bottom: 0;
+  width: 660px;
+  height: 500px;
+  z-index: 20;
+  background: radial-gradient(ellipse at 62% 89%, rgba(225, 113, 45, 0.16), transparent 61%);
+  filter: blur(33px);
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+/* ---------- papers ---------- */
+
+.a4-paper-pile {
+  position: absolute;
+  left: 20px;
+  bottom: -17px;
+  width: 490px;
+  height: 246px;
+  z-index: 20;
+  transform: rotate(-2deg);
+  opacity: 0.46;
+  filter: drop-shadow(0 24px 34px rgba(0, 0, 0, 0.5)) brightness(0.72);
+}
+.a4-sheet {
+  position: absolute;
+  display: block;
+  background:
+    repeating-linear-gradient(0deg, transparent 0 23px, rgba(72, 60, 43, 0.13) 24px, transparent 25px),
+    linear-gradient(90deg, transparent 0 26px, rgba(80, 66, 47, 0.12) 27px, transparent 28px),
+    linear-gradient(140deg, rgba(255, 251, 236, 0.18), transparent 35%),
+    linear-gradient(160deg, #c8bca4, #8d8069);
+  box-shadow:
+    inset 0 0 30px rgba(78, 61, 38, 0.26),
+    0 1px 0 rgba(255, 255, 255, 0.2) inset;
+  border-radius: 1px;
+}
+.a4-sheet.s1 {
+  left: 104px;
+  bottom: 41px;
+  width: 370px;
+  height: 180px;
+  transform: rotate(3.6deg);
+  opacity: 0.75;
+}
+.a4-sheet.s2 {
+  left: 93px;
+  bottom: 57px;
+  width: 370px;
+  height: 180px;
+  transform: rotate(1.8deg);
+  opacity: 0.6;
+}
+.a4-sheet.s3 {
+  left: 78px;
+  bottom: 78px;
+  width: 370px;
+  height: 180px;
+  transform: rotate(-1.4deg);
+  opacity: 0.82;
+}
+.a4-sheet.s4 {
+  left: 44px;
+  bottom: 102px;
+  width: 385px;
+  height: 175px;
+  transform: rotate(-5.3deg);
+  background:
+    linear-gradient(90deg, transparent 0 21px, rgba(65, 55, 42, 0.18) 22px, transparent 23px),
+    repeating-linear-gradient(0deg, transparent 0 26px, rgba(68, 57, 42, 0.12) 27px, transparent 28px),
+    linear-gradient(145deg, #d9cfb9, #a89b84);
+  opacity: 0.9;
+}
+.a4-float-paper {
+  position: absolute;
+  z-index: 17;
+  width: 190px;
+  height: 124px;
+  opacity: 0.035;
+  background:
+    repeating-linear-gradient(0deg, transparent 0 18px, rgba(89, 73, 51, 0.26) 19px, transparent 20px),
+    linear-gradient(150deg, #d8cdb4, #7f725b);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+}
+.a4-float-paper.p1 {
+  left: 102px;
+  top: 452px;
+  transform: rotate(-17deg);
+  animation: paper-drift-one 22s ease-in-out infinite;
+}
+.a4-float-paper.p2 {
+  right: 120px;
+  top: 118px;
+  width: 145px;
+  height: 94px;
+  transform: rotate(14deg);
+  animation: paper-drift-two 26s ease-in-out infinite;
+}
+
+.a4-dustfield {
+  z-index: 30;
+  opacity: 0.4;
+  mix-blend-mode: screen;
+}
+.a4-warmwash {
+  position: absolute;
+  inset: 0;
+  z-index: 40;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 87% 80%, rgba(208, 103, 38, 0.1), transparent 36%),
+    radial-gradient(ellipse at 25% 19%, rgba(190, 197, 172, 0.04), transparent 40%),
+    linear-gradient(0deg, rgba(0, 0, 0, 0.3), transparent 28%, rgba(0, 0, 0, 0.18));
+}
+.a4-endfade {
+  position: absolute;
+  inset: 0;
+  z-index: 76;
+  background: #030403;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 4.3s ease;
+}
+
+/* ---------- cues ---------- */
+
+.act4.step-1 .a4-board {
+  transform: scale(1.045) translate(-24px, -6px);
+}
+.act4.step-1 .a4-number-grid {
+  opacity: 0.24;
+  filter: url(#a4-chalk) blur(0.4px);
+}
+.act4.step-1 .a4-tallies {
+  opacity: 0.9;
+}
+.act4.step-1 .a4-circled {
+  transform: scale(1.035) translate(-13px, -2px);
+  filter: drop-shadow(0 0 22px rgba(213, 152, 107, 0.1));
+}
+.act4.step-1 .a4-formula {
+  opacity: 0.3;
+}
+.act4.step-1 .a4-formula-sub {
+  opacity: 0.1;
+}
+.act4.step-1 .a4-head {
+  opacity: 0.36;
+  transform: translateY(-3px);
+}
+
+.act4.step-2 .a4-number-grid {
+  opacity: 0.028;
+}
+.act4.step-2 .a4-tallies {
+  opacity: 0.065;
+}
+.act4.step-2 .a4-formula {
+  opacity: 0.035;
+}
+.act4.step-2 .a4-formula-sub {
+  opacity: 0;
+}
+.act4.step-2 .a4-circled {
+  opacity: 0.055;
+  filter: blur(2.2px);
+}
+.act4.step-2 .a4-chalk-head {
+  opacity: 0.035;
+}
+.act4.step-2 .a4-chalk-lines,
+.act4.step-2 .a4-chalk-note {
+  opacity: 0;
+}
+.act4.step-2 .a4-head {
+  opacity: 0.035;
+}
+.act4.step-2 .a4-maxpower {
+  opacity: 1;
+  transform: translateY(0) rotate(-0.6deg);
+  animation: a4-chalk-write 1.65s steps(15, end) 0.35s forwards;
+}
+.act4.step-2 .a4-maxpower::after {
+  animation: a4-underline 1.3s var(--ease-soft) 1.5s both;
+}
+.act4.step-2 .a4-board {
+  transform: scale(1.062) translate(-34px, -10px);
+}
+.act4.step-2 .a4-stove-glow {
+  opacity: 0.65;
+}
+.act4.step-2 .a4-circled .a4-smudge {
+  opacity: 1;
+}
+
+.act4.step-3 .a4-eraser {
+  opacity: 1;
+  animation: a4-erase-sweep 2.9s cubic-bezier(0.45, 0.05, 0.55, 0.95) 0.2s forwards;
+}
+.act4.step-3 .a4-circled {
+  opacity: 0;
+  filter: blur(5px);
+  transform: scale(1.04) translate(-5px, 0);
+  transition:
+    opacity 1.5s ease 1.05s,
+    filter 1.5s ease 1.05s,
+    transform 2s var(--ease-soft);
+}
+.act4.step-3 .a4-circled .a4-smudge {
+  opacity: 1;
+}
+.act4.step-3 .a4-erased-space {
+  opacity: 1;
+}
+.act4.step-3 .a4-chalk-dust-stain {
+  opacity: 1;
+}
+.act4.step-3 .a4-maxpower {
+  opacity: 0.36;
+  transition: opacity 1.6s ease 1.1s;
+}
+.act4.step-3 .a4-board {
+  transform: scale(1.055) translate(-31px, -8px);
+}
+.act4.step-3 .a4-stove-glow {
+  opacity: 0.78;
+}
+
+.act4.step-4 .a4-endfade {
+  opacity: 1;
+}
+.act4.step-4 .a4-maxpower {
+  opacity: 0;
+  transition: opacity 2.5s ease;
+}
+
+/* ---------- animation ---------- */
+
+@keyframes a4-circle-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes a4-chalk-write {
+  0% {
+    clip-path: inset(0 100% 0 0);
+    opacity: 0.3;
+  }
+  10% {
+    opacity: 1;
+  }
+  100% {
+    clip-path: inset(0 -2% 0 0);
+    opacity: 1;
+  }
+}
+@keyframes a4-underline {
+  from {
+    width: 0;
+    opacity: 0;
+  }
+  to {
+    width: 79%;
+    opacity: 0.7;
+  }
+}
+@keyframes a4-erase-sweep {
+  0% {
+    opacity: 0;
+    transform: translate3d(280px, -48px, 0) rotate(7deg);
+  }
+  12% {
+    opacity: 0.96;
+    transform: translate3d(120px, -25px, 0) rotate(4deg);
+  }
+  46% {
+    opacity: 1;
+    transform: translate3d(-160px, 15px, 0) rotate(-5deg);
+  }
+  78% {
+    opacity: 0.96;
+    transform: translate3d(-306px, 44px, 0) rotate(-8deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(-390px, 60px, 0) rotate(-9deg);
+  }
+}
+@keyframes stove-glow {
+  0%,
+  100% {
+    opacity: 0.78;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+@keyframes paper-drift-one {
+  0%,
+  100% {
+    transform: rotate(-17deg) translate(0, 0);
+  }
+  50% {
+    transform: rotate(-14deg) translate(8px, -12px);
+  }
+}
+@keyframes paper-drift-two {
+  0%,
+  100% {
+    transform: rotate(14deg) translate(0, 0);
+  }
+  50% {
+    transform: rotate(11deg) translate(-9px, 10px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .a4-stove-glow,
+  .a4-float-paper {
+    animation: none;
+  }
+}

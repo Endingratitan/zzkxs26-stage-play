@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>第四幕 · 第九次</title>
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/act-4.css" />
+</head>
+<body>
+  <div class="stage" id="stage">
+    <main class="scene act4" data-cue="0">
+      <div class="layer bg a4-room">
+        <div class="a4-wall"></div>
+        <div class="a4-wall-shadow"></div>
+        <div class="a4-floor"></div>
+
+        <div class="a4-board">
+          <div class="a4-board-frame"></div>
+          <div class="a4-board-inner">
+            <div class="a4-board-grain"></div>
+            <div class="a4-chalk-head">
+              <span>1961 · 冬 · 北京</span>
+              <span>二机部九所 · 理论部</span>
+            </div>
+            <div class="a4-tallies">
+              <span class="a4-tallies-label">第九次</span>
+              <span class="a4-tally"></span><span class="a4-tally"></span><span class="a4-tally"></span>
+              <span class="a4-tally"></span><span class="a4-tally"></span><span class="a4-tally"></span>
+              <span class="a4-tally"></span><span class="a4-tally"></span><span class="a4-tally last"></span>
+            </div>
+            <div class="a4-number-grid" id="numberGrid"></div>
+            <div class="a4-formula">W ≤ W<sub>max</sub></div>
+            <div class="a4-formula-sub">最大功 · thermodynamic limit</div>
+            <div class="a4-circled" id="circledData">
+              <svg class="a4-circle" viewBox="0 0 430 290" aria-hidden="true">
+                <path pathLength="1" d="M28 155 C36 61, 122 20, 224 27 C331 34, 402 82, 401 151 C400 229, 309 268, 203 263 C99 258, 24 223, 28 155 Z" />
+              </svg>
+              <div class="a4-data">
+                <span>P</span><sub>苏</sub>
+              </div>
+              <div class="a4-data-label">苏 方 数 据</div>
+              <div class="a4-data-note">压力值 · 对不上</div>
+              <div class="a4-smudge"></div>
+            </div>
+            <div class="a4-chalk-note">第九次 · 核了三遍 · 数没错</div>
+            <div class="a4-chalk-lines" aria-hidden="true">
+              <span></span><span></span><span></span><span></span>
+            </div>
+            <div class="a4-maxpower">最大功</div>
+            <div class="a4-eraser" id="eraser">
+              <span class="a4-eraser-top"></span>
+              <span class="a4-eraser-felt"></span>
+            </div>
+            <div class="a4-erased-space"></div>
+            <div class="a4-chalk-dust-stain"></div>
+          </div>
+        </div>
+
+        <div class="a4-stove">
+          <div class="a4-stove-glow"></div>
+          <div class="a4-stove-body">
+            <div class="a4-stove-top"></div>
+            <div class="a4-stove-door">
+              <span class="a4-stove-vent"></span>
+            </div>
+            <div class="a4-stove-leg left"></div>
+            <div class="a4-stove-leg right"></div>
+          </div>
+          <canvas class="a4-embers" id="emberfield"></canvas>
+        </div>
+
+        <div class="a4-paper-pile" aria-hidden="true">
+          <span class="a4-sheet s1"></span>
+          <span class="a4-sheet s2"></span>
+          <span class="a4-sheet s3"></span>
+          <span class="a4-sheet s4"></span>
+        </div>
+        <div class="a4-stove-light"></div>
+      </div>
+
+      <canvas class="fx-canvas a4-dustfield" id="dustfield"></canvas>
+      <div class="a4-warmwash"></div>
+
+      <header class="act-head a4-head">
+        <div class="act-index">ACT IV · 第四幕</div>
+        <h1 class="act-title">第九次</h1>
+        <div class="act-place">1961 · 冬 · 北京</div>
+      </header>
+
+      <div class="slate-meta">
+        THEORY DIVISION / 9TH<br />
+        BLACKBOARD · 02:17<span class="red-line"></span>
+      </div>
+
+      <div class="scene-footer">
+        <span>《署名》· 致知科学社</span>
+        <span>“错的不是我们，是那个数。”</span>
+      </div>
+
+      <div class="a4-endfade"></div>
+      <span class="reg-mark tl"></span>
+      <span class="reg-mark tr"></span>
+      <span class="reg-mark bl"></span>
+      <span class="reg-mark br"></span>
+      <div class="grain"></div>
+      <div class="vignette"></div>
+      <div class="film-edge"></div>
+    </main>
+  </div>
+
+  <svg width="0" height="0" class="a4-filters" aria-hidden="true">
+    <filter id="a4-chalk">
+      <feTurbulence type="fractalNoise" baseFrequency="0.72" numOctaves="2" seed="8" result="noise" />
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="3.2" xChannelSelector="R" yChannelSelector="G" />
+    </filter>
+  </svg>
+
+  <script src="../js/scene-core.js"></script>
+  <script src="../js/act-4.js"></script>
+</body>
+</html>

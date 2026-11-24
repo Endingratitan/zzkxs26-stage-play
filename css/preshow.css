@@ -1,0 +1,400 @@
+/* 预演 / standby — a single sheet in a dark room */
+
+body {
+  background: #050605;
+}
+
+.preshow {
+  --paper: #e8e1d3;
+  background:
+    radial-gradient(ellipse at 64% 38%, rgba(111, 124, 118, 0.13), transparent 48%),
+    linear-gradient(145deg, #070808 0%, #0b0d0d 55%, #080909 100%);
+}
+
+.pre-backdrop {
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.54) 0%, transparent 42%, transparent 100%),
+    radial-gradient(ellipse at 76% 22%, rgba(180, 185, 168, 0.1), transparent 45%),
+    radial-gradient(ellipse at 72% 82%, rgba(173, 52, 38, 0.06), transparent 40%);
+}
+
+.pre-haze {
+  opacity: 0.6;
+  background:
+    linear-gradient(100deg, transparent 35%, rgba(227, 221, 203, 0.035) 48%, transparent 60%),
+    radial-gradient(ellipse at 48% 50%, rgba(205, 204, 188, 0.06), transparent 52%);
+  filter: blur(16px);
+  animation: pre-haze-drift 26s var(--ease-in-out) infinite;
+}
+
+.pre-paper {
+  position: absolute;
+  right: 105px;
+  top: 130px;
+  width: 700px;
+  height: 830px;
+  z-index: 8;
+  color: #302b23;
+  transform: rotate(-2.6deg) perspective(1400px) rotateY(-7deg);
+  transform-origin: 50% 50%;
+  filter: drop-shadow(0 38px 70px rgba(0, 0, 0, 0.6));
+  opacity: 0;
+  animation:
+    pre-paper-enter 2.8s var(--ease-out) 0.25s forwards,
+    pre-paper-float 13s ease-in-out 3.4s infinite;
+}
+
+.pre-paper-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #dcd3c0;
+  background-image:
+    linear-gradient(113deg, rgba(255, 250, 235, 0.36), transparent 34%),
+    linear-gradient(300deg, rgba(55, 40, 24, 0.16), transparent 58%),
+    url("../assets/img/paper.svg");
+  background-size: auto, auto, 600px 600px;
+  box-shadow:
+    inset 0 0 120px rgba(73, 57, 36, 0.18),
+    0 1px 0 rgba(255, 255, 255, 0.5) inset;
+  border-radius: 1px;
+}
+
+.pre-paper-inner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(49, 36, 19, 0.18), transparent 8%, transparent 94%, rgba(49, 36, 19, 0.1)),
+    linear-gradient(0deg, rgba(49, 36, 19, 0.16), transparent 15%, transparent 92%, rgba(255, 250, 235, 0.16));
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+.pre-paper-head {
+  position: absolute;
+  left: 58px;
+  right: 58px;
+  top: 54px;
+  display: flex;
+  justify-content: space-between;
+  color: rgba(47, 41, 31, 0.55);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+}
+
+.pre-paper-rule {
+  position: absolute;
+  left: 58px;
+  right: 58px;
+  top: 78px;
+  height: 1px;
+  background: rgba(47, 41, 31, 0.28);
+}
+
+.pre-paper-title {
+  position: absolute;
+  left: 58px;
+  top: 126px;
+  color: rgba(38, 34, 27, 0.65);
+  font-family: var(--mono);
+  font-size: 27px;
+  line-height: 1.32;
+  letter-spacing: -0.035em;
+}
+
+.pre-paper-lines {
+  position: absolute;
+  left: 58px;
+  right: 78px;
+  top: 238px;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  opacity: 0.46;
+}
+.pre-paper-lines span {
+  display: block;
+  height: 1px;
+  background: rgba(48, 41, 30, 0.32);
+}
+.pre-paper-lines span:nth-child(3n) {
+  width: 72%;
+}
+.pre-paper-lines span:nth-child(4n) {
+  width: 86%;
+}
+
+.pre-paper-sign {
+  position: absolute;
+  left: 58px;
+  right: 58px;
+  bottom: 126px;
+}
+.pre-signature {
+  display: block;
+  font-family: var(--hand);
+  font-size: 64px;
+  line-height: 1;
+  color: rgba(29, 27, 22, 0.74);
+  transform: rotate(-4deg) translateX(-5px);
+  clip-path: inset(0 100% 0 0);
+  animation: pre-sign 2.7s var(--ease-soft) 2.1s forwards;
+}
+.pre-signature-rule {
+  display: block;
+  width: 260px;
+  height: 1px;
+  margin-top: 12px;
+  background: rgba(38, 32, 23, 0.4);
+}
+.pre-page-no {
+  position: absolute;
+  right: 56px;
+  bottom: 48px;
+  font-family: var(--mono);
+  font-size: 17px;
+  letter-spacing: 0.12em;
+  color: rgba(47, 41, 31, 0.36);
+}
+
+.pre-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 11;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(4, 5, 5, 0.8) 0%, transparent 42%, transparent 100%),
+    linear-gradient(0deg, rgba(4, 5, 5, 0.6), transparent 30%);
+}
+
+.pre-dust {
+  z-index: 12;
+  opacity: 0.75;
+}
+
+.pre-copy {
+  position: absolute;
+  left: 140px;
+  top: 250px;
+  width: 840px;
+  z-index: 20;
+}
+
+.pre-org {
+  font-family: var(--mono);
+  font-size: 14px;
+  letter-spacing: 0.25em;
+  color: rgba(232, 225, 211, 0.54);
+  opacity: 0;
+  animation: pre-copy-in 1.6s var(--ease-out) 0.5s forwards;
+}
+
+.pre-title-wrap {
+  position: relative;
+  margin-top: 62px;
+  display: flex;
+  align-items: flex-end;
+  gap: 38px;
+}
+
+.pre-title {
+  font-family: var(--serif);
+  font-size: 218px;
+  font-weight: 800;
+  line-height: 0.92;
+  letter-spacing: 0.06em;
+  color: #e9e2d4;
+  text-shadow: 0 8px 80px rgba(0, 0, 0, 0.55);
+  opacity: 0;
+  transform: translateY(26px);
+  animation: pre-title-in 2.1s var(--ease-out) 0.7s forwards;
+}
+
+.pre-title-annot {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  padding-bottom: 19px;
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.5;
+  letter-spacing: 0.16em;
+  color: rgba(232, 225, 211, 0.56);
+  opacity: 0;
+  animation: pre-copy-in 1.4s var(--ease-out) 1.85s forwards;
+}
+.pre-red-dot {
+  display: block;
+  width: 6px;
+  height: 6px;
+  margin-bottom: 4px;
+  border-radius: 50%;
+  background: var(--red);
+  box-shadow: 0 0 16px rgba(173, 52, 38, 0.8);
+}
+
+.pre-rule {
+  width: 0;
+  height: 1px;
+  margin-top: 51px;
+  background: linear-gradient(90deg, rgba(173, 52, 38, 0.95), rgba(173, 52, 38, 0.08));
+  animation: pre-rule-in 2.2s var(--ease-soft) 1.1s forwards;
+}
+
+.pre-quote {
+  margin-top: 31px;
+  font-family: var(--serif);
+  font-size: 27px;
+  font-weight: 400;
+  line-height: 1.95;
+  letter-spacing: 0.1em;
+  color: rgba(232, 225, 211, 0.8);
+  opacity: 0;
+  animation: pre-copy-in 2.2s var(--ease-out) 1.65s forwards;
+}
+
+.pre-footer {
+  position: absolute;
+  left: 140px;
+  right: 120px;
+  bottom: 60px;
+  z-index: 24;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  font-family: var(--mono);
+  font-size: 11px;
+  line-height: 1.5;
+  letter-spacing: 0.17em;
+  color: rgba(232, 225, 211, 0.38);
+  opacity: 0;
+  animation: pre-copy-in 1.4s var(--ease-out) 2.9s forwards;
+}
+.pre-footer-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.pre-footer-sep {
+  width: 18px;
+  height: 1px;
+  background: rgba(232, 225, 211, 0.26);
+}
+
+.pre-side-note {
+  position: absolute;
+  right: 54px;
+  top: 252px;
+  z-index: 24;
+  display: flex;
+  flex-direction: column;
+  gap: 99px;
+  align-items: center;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: rgba(232, 225, 211, 0.24);
+}
+.pre-side-note::before {
+  content: "";
+  width: 1px;
+  height: 104px;
+  background: linear-gradient(to bottom, transparent, rgba(232, 225, 211, 0.2));
+}
+
+@keyframes pre-paper-enter {
+  from {
+    opacity: 0;
+    transform: rotate(-4deg) perspective(1400px) rotateY(-11deg) translateX(80px) scale(0.96);
+    filter: blur(10px) drop-shadow(0 38px 70px rgba(0, 0, 0, 0));
+  }
+  to {
+    opacity: 0.92;
+    transform: rotate(-2.6deg) perspective(1400px) rotateY(-7deg) translateX(0) scale(1);
+    filter: blur(0) drop-shadow(0 38px 70px rgba(0, 0, 0, 0.6));
+  }
+}
+
+@keyframes pre-paper-float {
+  0%,
+  100% {
+    transform: rotate(-2.6deg) perspective(1400px) rotateY(-7deg) translateY(0);
+  }
+  50% {
+    transform: rotate(-2.35deg) perspective(1400px) rotateY(-6.4deg) translateY(-12px);
+  }
+}
+
+@keyframes pre-sign {
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes pre-copy-in {
+  from {
+    opacity: 0;
+    transform: translateY(13px);
+    filter: blur(3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes pre-title-in {
+  from {
+    opacity: 0;
+    transform: translateY(34px);
+    filter: blur(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes pre-rule-in {
+  to {
+    width: 490px;
+  }
+}
+
+@keyframes pre-haze-drift {
+  0%,
+  100% {
+    transform: translate3d(-18px, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(24px, -12px, 0) scale(1.03);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pre-paper,
+  .pre-title,
+  .pre-org,
+  .pre-copy-in,
+  .pre-quote,
+  .pre-footer,
+  .pre-title-annot,
+  .pre-signature,
+  .pre-haze {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    opacity: 1;
+    transform: none;
+    filter: none;
+    clip-path: inset(0 0 0 0);
+  }
+  .pre-rule {
+    width: 490px;
+    animation: none;
+  }
+}

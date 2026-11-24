@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>第一幕 · 三十七页</title>
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/act-1.css" />
+</head>
+<body>
+  <div class="stage" id="stage">
+    <main class="scene act1" data-cue="0">
+      <div class="layer bg a1-room">
+        <div class="a1-wall"></div>
+        <div class="a1-wall-grain"></div>
+        <div class="a1-floor"></div>
+        <div class="a1-lightspill"></div>
+
+        <div class="a1-window" aria-hidden="true">
+          <div class="a1-window-view">
+            <div class="a1-night-sky"></div>
+            <div class="a1-moon-glow"></div>
+            <div class="a1-horizon"></div>
+            <svg class="a1-trees" viewBox="0 0 720 820" preserveAspectRatio="xMidYMid slice">
+              <g fill="none" stroke="#050b0e" stroke-linecap="round" opacity="0.9">
+                <path d="M112 820 C104 680 120 580 96 474 C82 413 92 355 72 300" stroke-width="24"/>
+                <path d="M96 474 C45 442 22 396 4 344" stroke-width="11"/>
+                <path d="M101 550 C150 518 183 482 206 436" stroke-width="9"/>
+                <path d="M92 400 C128 373 156 341 170 300" stroke-width="7"/>
+                <path d="M87 354 C58 327 40 300 31 264" stroke-width="6"/>
+                <path d="M595 820 C608 675 590 572 616 468 C630 408 621 342 648 278" stroke-width="28"/>
+                <path d="M612 468 C666 430 690 389 714 332" stroke-width="11"/>
+                <path d="M604 560 C555 526 526 492 501 444" stroke-width="9"/>
+                <path d="M620 392 C579 363 558 330 540 288" stroke-width="7"/>
+                <path d="M628 322 C656 296 675 268 686 237" stroke-width="6"/>
+                <path d="M278 820 C272 732 286 654 275 578" stroke-width="9" opacity="0.55"/>
+                <path d="M281 672 C244 652 225 628 208 596" stroke-width="4" opacity="0.55"/>
+                <path d="M438 820 C430 713 445 628 430 544" stroke-width="7" opacity="0.5"/>
+                <path d="M435 660 C468 641 490 615 505 584" stroke-width="3.5" opacity="0.5"/>
+              </g>
+              <g fill="#050b0e" opacity="0.5">
+                <ellipse cx="190" cy="794" rx="212" ry="18"/>
+                <ellipse cx="562" cy="804" rx="238" ry="21"/>
+              </g>
+            </svg>
+            <div class="a1-snow-edge"></div>
+            <canvas class="a1-snow" id="snowfield"></canvas>
+            <div class="a1-frost"></div>
+            <div class="a1-glass-reflection"></div>
+          </div>
+          <div class="a1-window-frame">
+            <div class="a1-frame-top"></div>
+            <div class="a1-frame-bottom"></div>
+            <div class="a1-frame-left"></div>
+            <div class="a1-frame-right"></div>
+            <div class="a1-mullion v"></div>
+            <div class="a1-mullion h"></div>
+            <div class="a1-sill"></div>
+          </div>
+          <div class="a1-curtain left"></div>
+          <div class="a1-curtain right"></div>
+        </div>
+
+        <div class="a1-desk-edge"></div>
+        <div class="a1-lamp">
+          <div class="a1-lamp-shade"></div>
+          <div class="a1-lamp-stem"></div>
+          <div class="a1-lamp-pool"></div>
+        </div>
+      </div>
+
+      <div class="layer a1-cold-light">
+        <div class="a1-window-cast"></div>
+        <div class="a1-glow blue"></div>
+        <div class="a1-glow warm"></div>
+      </div>
+
+      <div class="a1-ghost-number" aria-hidden="true">37</div>
+      <div class="a1-page-stack" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
+
+      <div class="a1-document" aria-hidden="true">
+        <div class="a1-paper sheet">
+          <div class="a1-paper-grain"></div>
+          <div class="a1-paper-head">
+            <div class="a1-paper-org">
+              <span>JOINT INSTITUTE FOR NUCLEAR RESEARCH</span>
+              <span>DUBNA · U.S.S.R.</span>
+            </div>
+            <div class="a1-paper-ref">
+              <span>PREPRINT</span>
+              <span>P-37 / 1959</span>
+            </div>
+          </div>
+          <div class="a1-paper-rule top"></div>
+          <div class="a1-paper-title">
+            <span class="a1-title-line short"></span>
+            <span class="a1-title-line"></span>
+            <span class="a1-title-line mid"></span>
+          </div>
+          <div class="a1-formula-block">
+            <div class="a1-formula">∂<sub>μ</sub> J<sup>μ</sup> = 0</div>
+            <div class="a1-formula small">[ A<sub>μ</sub>, A<sub>ν</sub> ] = i F<sub>μν</sub></div>
+            <div class="a1-formula-lines">
+              <span></span><span></span><span></span><span></span>
+              <span></span><span></span><span></span><span></span>
+              <span></span><span class="half"></span>
+            </div>
+          </div>
+          <div class="a1-paper-margin-note">31</div>
+          <div class="a1-sign-area">
+            <div class="a1-sign-label">SIGNATURE</div>
+            <div class="a1-sign-line"></div>
+            <span class="a1-signature hand">周光召</span>
+            <div class="a1-sign-date">1959 · 春</div>
+          </div>
+          <div class="a1-paper-foot">
+            <span>DUBNA, 1959</span>
+            <span>37</span>
+          </div>
+          <div class="a1-paper-fold"></div>
+        </div>
+        <div class="a1-pen">
+          <span class="a1-pen-body"></span>
+          <span class="a1-pen-nib"></span>
+          <span class="a1-ink-drop"></span>
+        </div>
+      </div>
+
+      <div class="a1-letter" aria-hidden="true">
+        <div class="a1-envelope">
+          <div class="a1-envelope-flap"></div>
+          <div class="a1-envelope-body">
+            <div class="a1-envelope-stamp">
+              <span>1959</span>
+            </div>
+            <div class="a1-envelope-address">
+              <span></span><span></span>
+            </div>
+            <div class="a1-envelope-postmark">DUBNA</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="a1-coldly-lit paper-warmth" aria-hidden="true"></div>
+      <canvas class="fx-canvas a1-dust" id="dustfield"></canvas>
+
+      <header class="act-head a1-head">
+        <div class="act-index">ACT I · 第一幕</div>
+        <h1 class="act-title">三十七页</h1>
+        <div class="act-place">1959 · 春 · 杜布纳</div>
+      </header>
+
+      <div class="slate-meta">
+        JINR / DUBNA<br />
+        ROOM 214 · 23:47<span class="red-line"></span>
+      </div>
+
+      <div class="scene-footer">
+        <span>《署名》· 致知科学社</span>
+        <span>“到时候，世界会记住你的名字。”</span>
+      </div>
+
+      <div class="a1-endfade"></div>
+      <span class="reg-mark tl"></span>
+      <span class="reg-mark tr"></span>
+      <span class="reg-mark bl"></span>
+      <span class="reg-mark br"></span>
+      <div class="grain"></div>
+      <div class="vignette"></div>
+      <div class="film-edge"></div>
+    </main>
+  </div>
+
+  <script src="../js/scene-core.js"></script>
+  <script src="../js/act-1.js"></script>
+</body>
+</html>

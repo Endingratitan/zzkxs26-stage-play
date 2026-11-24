@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>《署名》· 播控台</title>
+  <link rel="stylesheet" href="css/console.css" />
+</head>
+<body>
+  <div class="console-app">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-seal">署</div>
+        <div class="brand-copy">
+          <strong>《署名》舞台影像</strong>
+          <span>STAGE PROJECTION CONTROL · 2026</span>
+        </div>
+      </div>
+
+      <div class="topbar-center">
+        <div class="connection" id="connection">
+          <span class="connection-dot"></span>
+          <span id="connectionLabel">放映器未连接</span>
+        </div>
+        <div class="topbar-rule"></div>
+        <div class="clock">
+          <span id="clock">--:--:--</span>
+          <small>LOCAL</small>
+        </div>
+      </div>
+
+      <div class="topbar-actions">
+        <button class="ghost-btn" id="openStage" type="button">
+          打开放映器
+          <span>↗</span>
+        </button>
+        <button class="ghost-btn compact" id="helpToggle" type="button" aria-label="显示键盘操作">
+          键位
+        </button>
+      </div>
+    </header>
+
+    <main class="workspace">
+      <aside class="panel acts-panel">
+        <div class="panel-head">
+          <span class="panel-kicker">SCENES</span>
+          <span class="panel-meta">00 — 05</span>
+        </div>
+        <div class="act-list" id="actList"></div>
+        <div class="acts-foot">
+          <span class="foot-label">RUN TIME</span>
+          <strong>约 8 分钟</strong>
+          <span class="foot-note">五幕 · 6+1 演员</span>
+        </div>
+      </aside>
+
+      <section class="center-panel">
+        <div class="monitor" id="monitor">
+          <div class="monitor-grid"></div>
+          <div class="monitor-noise"></div>
+          <div class="monitor-head">
+            <div class="monitor-status">
+              <span class="live-dot" id="liveDot"></span>
+              <span id="monitorStatus">等待放映器连接</span>
+            </div>
+            <div class="monitor-code" id="monitorCode">CUE — / —</div>
+          </div>
+
+          <div class="monitor-content">
+            <div class="monitor-actno" id="monitorActNo">00</div>
+            <div class="monitor-title-wrap">
+              <div class="monitor-kicker" id="monitorKicker">STANDBY / 预演</div>
+              <h1 class="monitor-title" id="monitorTitle">预演</h1>
+              <div class="monitor-place" id="monitorPlace">509 报告厅 · 舞台大屏</div>
+            </div>
+            <div class="monitor-cue" id="monitorCue">
+              <span class="monitor-cue-index">01</span>
+              <span class="monitor-cue-label">场景待机</span>
+            </div>
+          </div>
+
+          <div class="monitor-bottom">
+            <div class="monitor-next">
+              <span>NEXT</span>
+              <strong id="nextCueLabel">等待放映器连接</strong>
+            </div>
+            <div class="monitor-progress">
+              <span class="monitor-progress-label">CUE PROGRESS</span>
+              <div class="progress-track"><span id="progressFill"></span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="transport">
+          <button class="transport-btn" id="prevCue" type="button">
+            <span class="transport-arrow">←</span>
+            <span><strong>上一提示</strong><small>PREV CUE</small></span>
+          </button>
+          <button class="transport-btn primary" id="nextCue" type="button">
+            <span><strong>下一提示</strong><small>NEXT CUE</small></span>
+            <span class="transport-arrow">→</span>
+          </button>
+          <div class="transport-divider"></div>
+          <button class="transport-btn small" id="blackout" type="button">
+            <span><strong>黑场</strong><small>BLACKOUT · B</small></span>
+          </button>
+          <button class="transport-btn small" id="resetAct" type="button">
+            <span><strong>重播</strong><small>RESTART · R</small></span>
+          </button>
+          <button class="transport-btn small" id="fullscreen" type="button">
+            <span><strong>全屏</strong><small>FULLSCREEN · F</small></span>
+          </button>
+        </div>
+
+        <div class="runline">
+          <div class="runline-title">
+            <span>RUN OF SHOW</span>
+            <span id="runlineHint">点击场次卡片切幕</span>
+          </div>
+          <div class="runline-track" id="runlineTrack"></div>
+        </div>
+      </section>
+
+      <aside class="panel cue-panel">
+        <div class="panel-head">
+          <span class="panel-kicker">CUE SHEET</span>
+          <span class="panel-meta" id="cuePanelAct">00 / 预演</span>
+        </div>
+        <div class="cue-panel-current">
+          <span class="cue-panel-index" id="cuePanelIndex">00 / 01</span>
+          <strong id="cuePanelTitle">场景待机</strong>
+        </div>
+        <div class="cue-list" id="cueList"></div>
+        <div class="key-help" id="keyHelp">
+          <div class="key-help-head"><span>KEYBOARD</span><span>操作提示</span></div>
+          <div class="key-grid">
+            <span><b>0–5</b>切场</span>
+            <span><b>SPACE</b>下一提示</span>
+            <span><b>←</b>上一提示</span>
+            <span><b>B</b>黑场</span>
+            <span><b>R</b>重播</span>
+            <span><b>F</b>全屏</span>
+          </div>
+        </div>
+        <div class="cue-note">
+          <span class="note-mark"></span>
+          <p>首次使用时，先在放映窗口点击「开始放映」并进入全屏；随后可在本台遥控切幕与提示。</p>
+        </div>
+      </aside>
+    </main>
+
+    <footer class="footer">
+      <span>致知科学社 · 2026 社团风采展</span>
+      <span class="footer-center">《署名》V1.4 · 舞台背景</span>
+      <span>509 报告厅 / 16:9</span>
+    </footer>
+
+    <div class="toast" id="toast"></div>
+  </div>
+  <script src="js/console.js"></script>
+</body>
+</html>
