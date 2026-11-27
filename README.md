@@ -76,6 +76,16 @@ htmlS/
     └── img/                纸纹、颗粒、实拍道具抠图
 ```
 
+## 压缩构建
+
+`js/` 下是 Google Closure Compiler（`SIMPLE_OPTIMIZATIONS`，已关闭 polyfill 注入）压缩后的脚本，未压缩源码保留在压缩之前的 git 提交里。改动脚本后可重新压缩：
+
+```bash
+bash tools/minify.sh
+```
+
+需要 Java 11+ 与 Node；脚本默认用 `npx google-closure-compiler` 调用编译器，也可以用 `CLOSURE_JAR=/path/to/compiler.jar` 指定本地 jar。压缩只影响 `js/`，HTML、CSS 与字体不动。
+
 ## 设计说明
 
 - 视觉原则：**一盏灯照亮一页纸，纸上的人名正在消失。**
