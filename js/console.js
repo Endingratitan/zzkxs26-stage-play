@@ -19,7 +19,7 @@
       short: "ACT I",
       kicker: "ACT I / 第一幕",
       place: "1959 · 春 · 杜布纳",
-      time: "1.2'",
+      time: "1:12",
       tone: "#86a6b2",
       soft: "rgba(134,166,178,0.13)",
       cues: [
@@ -36,7 +36,7 @@
       short: "ACT II",
       kicker: "ACT II / 第二幕",
       place: "1959.6 · 杜布纳",
-      time: "1.3'",
+      time: "1:18",
       tone: "#c19458",
       soft: "rgba(193,148,88,0.12)",
       cues: [
@@ -53,7 +53,7 @@
       short: "ACT III",
       kicker: "ACT III / 第三幕",
       place: "1960 · 冬 · 杜布纳",
-      time: "1.5'",
+      time: "1:30",
       tone: "#c6a06d",
       soft: "rgba(198,160,109,0.12)",
       cues: [
@@ -70,7 +70,7 @@
       short: "ACT IV",
       kicker: "ACT IV / 第四幕",
       place: "1961 · 冬 · 北京",
-      time: "1.9'",
+      time: "1:54",
       tone: "#a19a7e",
       soft: "rgba(161,154,126,0.11)",
       cues: [
@@ -87,7 +87,7 @@
       short: "ACT V",
       kicker: "ACT V / 第五幕",
       place: "1964.10.16 · 北京",
-      time: "1.8'",
+      time: "1:48",
       tone: "#cd8c5b",
       soft: "rgba(205,140,91,0.13)",
       cues: [
@@ -211,6 +211,10 @@
       toast("已聚焦放映窗口");
       return;
     }
+    if (connected) {
+      toast("放映器已在线，请切换到放映窗口；关闭旧窗口后可在这里重开");
+      return;
+    }
     const popup = window.open(
       "stage.html",
       "shuming-stage",
@@ -223,7 +227,7 @@
     stageWindow = popup;
     hasOpenedStage = true;
     openStageBtn.innerHTML = "聚焦放映器 <span>↗</span>";
-    toast("放映器已打开 · 请在放映窗口点击「开始放映」");
+    toast("放映器已打开 · 点击放映画面或按 F 进入全屏");
     setTimeout(() => {
       if (stageWindow && !stageWindow.closed) {
         try {
@@ -275,14 +279,17 @@
     if (!on) {
       monitorStatus.textContent = "等待放映器连接";
     } else if (!status || !status.started) {
-      monitorStatus.textContent = "已连接 · 等待开始放映";
+      monitorStatus.textContent = "已连接 · 等待画面";
     } else if (status.blackout) {
       monitorStatus.textContent = "黑场中 · 画面被遮盖";
     } else {
       monitorStatus.textContent = "画面正在播出";
     }
-    openStageBtn.innerHTML =
-      on && hasOpenedStage ? "聚焦放映器 <span>↗</span>" : on ? "打开放映器 <span>↗</span>" : "打开放映器 <span>↗</span>";
+    openStageBtn.innerHTML = on
+      ? hasOpenedStage
+        ? "聚焦放映器 <span>↗</span>"
+        : "放映器在线 <span>·</span>"
+      : "打开放映器 <span>↗</span>";
   }
 
   function renderActList() {
@@ -445,7 +452,7 @@
       return;
     }
     if (!status || !status.started) {
-      toast("请先在放映窗口点击「开始放映」");
+      toast("放映器正在准备画面，请稍候");
       return;
     }
     sendCommand("switch", { act: n, cue: 0 });
@@ -457,7 +464,7 @@
       return;
     }
     if (!status || !status.started) {
-      toast("请先在放映窗口点击「开始放映」");
+      toast("放映器正在准备画面，请稍候");
       return;
     }
     if (status.activeAct === selectedAct) {

@@ -192,7 +192,7 @@ body {
   z-index: 7;
   width: 112px;
   height: 138px;
-  opacity: 0.55;
+  opacity: 0.68;
 }
 .a5-clock-face {
   position: relative;
@@ -620,7 +620,7 @@ body {
   position: absolute;
   left: 49px;
   right: 53px;
-  bottom: 93px;
+  bottom: 238px;
 }
 .a5-oldpage-sign-label {
   display: block;
@@ -694,9 +694,9 @@ body {
   top: -20%;
   height: 122%;
   background:
-    radial-gradient(ellipse at 26% 43%, rgba(255, 228, 177, 0.9), transparent 27%),
-    radial-gradient(ellipse at 23% 53%, rgba(255, 157, 72, 0.42), transparent 58%),
-    linear-gradient(90deg, rgba(255, 182, 103, 0.2), transparent 62%);
+    radial-gradient(ellipse at 26% 43%, rgba(255, 237, 202, 0.98), transparent 29%),
+    radial-gradient(ellipse at 23% 53%, rgba(255, 160, 75, 0.55), transparent 62%),
+    linear-gradient(90deg, rgba(255, 190, 113, 0.34), rgba(255, 178, 98, 0.08) 58%, transparent 82%);
   filter: blur(38px);
 }
 .a5-shockwave {
@@ -776,6 +776,7 @@ body {
   color: #28231c;
   background-color: #dcd2bf;
   background-image:
+    linear-gradient(0deg, transparent 49.7%, rgba(55, 42, 25, 0.06) 50%, transparent 50.4%),
     linear-gradient(107deg, rgba(255, 250, 235, 0.4), transparent 36%),
     linear-gradient(302deg, rgba(72, 54, 33, 0.12), transparent 62%),
     url("../assets/img/paper.svg");
@@ -882,23 +883,23 @@ body {
   border-bottom: 1px solid rgba(56, 44, 29, 0.2);
 }
 .a5-byline-label {
-  color: rgba(55, 44, 30, 0.55);
+  color: rgba(55, 44, 30, 0.62);
   font-family: var(--serif);
-  font-size: 18px;
+  font-size: 24px;
   letter-spacing: 0.12em;
   white-space: nowrap;
 }
 .a5-byline-rule {
   display: block;
-  width: 306px;
+  width: 348px;
   height: 1px;
   margin-bottom: 5px;
   background: rgba(55, 44, 30, 0.27);
 }
 .a5-byline-empty {
-  color: rgba(161, 48, 34, 0.7);
+  color: rgba(161, 48, 34, 0.88);
   font-family: var(--mono);
-  font-size: 12px;
+  font-size: 24px;
   letter-spacing: 0.18em;
   white-space: nowrap;
 }
@@ -1102,7 +1103,7 @@ body {
 /* ---------- cues ---------- */
 
 .act5.step-1 .a5-flash {
-  animation: a5-flash-bloom 3.2s var(--ease-soft) 0.15s both;
+  animation: a5-flash-bloom 4.4s var(--ease-soft) 0.15s both;
 }
 .act5.step-1 .a5-shockwave.w1 {
   animation: shockwave 2.7s ease-out 0.2s both;
@@ -1182,7 +1183,7 @@ body {
 }
 .act5.step-3 .a5-oldpage {
   opacity: 1;
-  transform: translate3d(-50%, -58px, 0) rotate(-1.1deg);
+  transform: translate3d(-50%, -12px, 0) rotate(-1.1deg);
   filter: brightness(1.03) blur(0);
   box-shadow:
     0 24px 70px rgba(0, 0, 0, 0.5),
@@ -1221,6 +1222,7 @@ body {
 }
 .act5.step-5 .a5-ending-signature {
   opacity: 1;
+  animation: ghost-name-dissolve 9s var(--ease-soft) 2.4s forwards;
 }
 .act5.step-5 .a5-ending-name {
   animation: ending-name-in 2.4s var(--ease-out) 0.9s forwards;
@@ -1306,14 +1308,17 @@ body {
   0% {
     opacity: 0;
   }
-  9% {
-    opacity: 0.9;
+  8% {
+    opacity: 1;
   }
-  16% {
-    opacity: 0.34;
+  15% {
+    opacity: 0.62;
   }
-  31% {
-    opacity: 0.52;
+  32% {
+    opacity: 0.78;
+  }
+  58% {
+    opacity: 0.28;
   }
   100% {
     opacity: 0;
@@ -1332,6 +1337,22 @@ body {
     opacity: 0;
   }
 }
+@keyframes ghost-name-dissolve {
+  0% {
+    opacity: 1;
+    filter: blur(0);
+  }
+  55% {
+    opacity: 0.5;
+    filter: blur(2px);
+  }
+  100% {
+    opacity: 0;
+    filter: blur(9px);
+    transform: translate(-50%, -50%) rotate(-5deg) scale(1.035);
+  }
+}
+
 @keyframes ending-name-in {
   from {
     opacity: 0;

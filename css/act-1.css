@@ -617,7 +617,7 @@ body {
   position: absolute;
   left: 64px;
   right: 64px;
-  bottom: 114px;
+  bottom: 208px;
   height: 150px;
   z-index: 4;
 }
@@ -735,10 +735,10 @@ body {
 
 .a1-letter {
   position: absolute;
-  left: 176px;
-  bottom: 118px;
-  width: 594px;
-  height: 344px;
+  left: 206px;
+  bottom: 128px;
+  width: 646px;
+  height: 374px;
   z-index: 18;
   opacity: 0;
   transform: translate3d(-30px, 52px, 0) rotate(-6deg);
@@ -796,19 +796,20 @@ body {
 }
 .a1-envelope-stamp {
   position: absolute;
-  right: 43px;
-  top: 36px;
+  right: 47px;
+  top: 39px;
   display: grid;
   place-items: center;
-  width: 58px;
-  height: 72px;
-  background: #c9bda6;
-  border: 5px double rgba(126, 59, 44, 0.35);
-  color: rgba(80, 51, 39, 0.55);
+  width: 64px;
+  height: 79px;
+  background: #cab99e;
+  border: 5px double rgba(122, 54, 40, 0.5);
+  color: rgba(80, 51, 39, 0.68);
   font-family: var(--mono);
   font-size: 8px;
   letter-spacing: 0.05em;
   transform: rotate(3deg);
+  box-shadow: inset 0 0 0 2px rgba(196, 177, 147, 0.3);
 }
 .a1-envelope-address {
   position: absolute;
@@ -820,26 +821,26 @@ body {
 }
 .a1-envelope-address span {
   display: block;
-  width: 172px;
+  width: 196px;
   height: 1px;
-  background: rgba(60, 47, 32, 0.35);
+  background: rgba(60, 47, 32, 0.46);
 }
 .a1-envelope-address span:last-child {
   width: 118px;
 }
 .a1-envelope-postmark {
   position: absolute;
-  left: 219px;
-  top: 90px;
-  width: 106px;
-  height: 40px;
-  border: 1px solid rgba(54, 47, 38, 0.3);
+  left: 238px;
+  top: 102px;
+  width: 118px;
+  height: 44px;
+  border: 1px solid rgba(54, 47, 38, 0.44);
   border-radius: 50%;
-  color: rgba(54, 47, 38, 0.35);
+  color: rgba(54, 47, 38, 0.48);
   font-family: var(--mono);
   font-size: 7px;
   letter-spacing: 0.16em;
-  line-height: 40px;
+  line-height: 44px;
   text-align: center;
   transform: rotate(-8deg);
 }
@@ -847,7 +848,7 @@ body {
 .a1-coldly-lit {
   position: absolute;
   inset: 0;
-  z-index: 30;
+  z-index: 9;
   pointer-events: none;
   background: radial-gradient(ellipse at 72% 28%, transparent 18%, rgba(0, 0, 0, 0.25) 72%, rgba(0, 0, 0, 0.55));
 }
@@ -933,7 +934,14 @@ body {
   filter: drop-shadow(-28px 28px 70px rgba(0, 0, 0, 0.5)) brightness(0.58);
 }
 .act1.step-3 .a1-lamp {
-  opacity: 0.2;
+  opacity: 0.46;
+}
+.act1.step-3 .a1-lamp-pool {
+  background: radial-gradient(ellipse at center, rgba(226, 171, 102, 0.28), transparent 69%);
+}
+.act1.step-3 .a1-glow.warm {
+  opacity: 1;
+  background: rgba(209, 151, 79, 0.16);
 }
 .act1.step-3 .a1-window-cast {
   opacity: 0.2;

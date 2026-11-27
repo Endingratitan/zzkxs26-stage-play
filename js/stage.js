@@ -6,12 +6,17 @@
   const CONSOLE_CHANNEL = "shuming-stage-console";
   const params = new URLSearchParams(location.search);
   const skipIntro = params.get("skipintro") === "1";
-  const hudDisabled = params.get("hud") === "0";
+  const setupMode = params.get("setup") === "1";
+  const autoStart = !setupMode;
+  // The projection surface must stay clean by default. A tiny operator HUD can
+  // still be enabled explicitly with ?hud=1 for stage-only rehearsal.
+  const hudDisabled = params.get("hud") !== "1";
   const requestedAct = Number.parseInt(params.get("act") || "0", 10);
   const requestedCue = Number.parseInt(params.get("cue") || "0", 10);
 
   const frames = Array.from(document.querySelectorAll(".scene-frame"));
   const intro = document.getElementById("intro");
+  const projector = document.getElementById("projector");
   const startButton = document.getElementById("startButton");
   const startLabel = document.getElementById("startLabel");
   const loadStatus = document.getElementById("loadStatus");
@@ -148,7 +153,8 @@
     if (state.introHidden) return;
     state.introHidden = true;
     intro.classList.add("is-hidden");
-    startButton.blur();
+    intro.hidden = true;
+    if (startButton) startButton.blur();
     document.body.style.cursor = "default";
     resetIdleCursor();
   }
@@ -159,7 +165,14 @@
     hideIntro();
     attemptFullscreen();
     activateAct(clampAct(act), Math.max(0, cue), { immediate: true });
-    showHud(2500);
+    postConsoleStatus();
+  }
+
+  function startProjection(act = 0, cue = 0) {
+    if (state.started) return;
+    state.started = true;
+    hideIntro();
+    activateAct(clampAct(act), Math.max(0, cue), { immediate: true });
     postConsoleStatus();
   }
 
@@ -389,7 +402,8 @@
       if (!m) return;
 
       if (data.type === "scene-ready") {
-        if (!m.ready) {
+        const wasReady = m.ready;
+        if (!wasReady) {
           m.ready = true;
           state.readyCount += 1;
         }
@@ -398,6 +412,12 @@
         m.title = data.title || m.title;
         updateLoadStatus();
         maybeAutoStart();
+        // If an act was selected before its iframe finished booting, the first
+        // activate message could have gone to about:blank. Re-send it once.
+        if (!wasReady && state.started && state.activeAct === act) {
+          sendToAct(act, "activate", { cue: Math.max(0, state.activeCue || 0) });
+          postConsoleStatus();
+        }
         postConsoleStatus();
       } else if (data.type === "scene-state") {
         m.cueIndex = Number.isFinite(data.cue) ? data.cue : 0;
@@ -524,6 +544,13 @@
     startShow(requestedAct, requestedCue);
   });
 
+  // On the projector, a click anywhere is also a trusted fullscreen gesture.
+  // It is intentionally invisible: no on-screen CTA during the performance.
+  projector.addEventListener("click", () => {
+    if (!state.started) return;
+    if (!document.fullscreenElement) attemptFullscreen();
+  });
+
   frames.forEach((frame) => {
     frame.addEventListener("load", () => {
       // If the frame's ready message raced the parent script, ask for state.
@@ -538,33 +565,32 @@
   });
 
   function maybeAutoStart() {
-    if (!skipIntro || state.started) return;
-    const act = Number.isFinite(requestedAct) ? clampAct(requestedAct) : 0;
-    const m = meta.get(act);
+    if (!autoStart || state.started) return;
+    const requested = Number.isFinite(requestedAct) ? clampAct(requestedAct) : 0;
+    const m = meta.get(requested) || meta.get(0);
     if (m && m.ready) {
-      state.started = true;
-      intro.classList.add("is-hidden");
-      state.introHidden = true;
-      activateAct(act, Math.max(0, requestedCue), { immediate: true });
-      postConsoleStatus();
+      startProjection(requested, Math.max(0, requestedCue));
     }
   }
 
-  // Keep the start page usable even if a frame fails to announce itself.
-  setTimeout(enableStartFallback, 7000);
-  if (skipIntro) {
-    intro.classList.add("is-hidden");
+  // Default stage: no operator UI on the projector. The pre-show begins as soon
+  // as its scene is ready; all other scenes continue preloading.
+  if (autoStart || skipIntro) {
+    intro.hidden = true;
     state.introHidden = true;
+    document.body.classList.add("auto-mode");
     startFallbackTimer = setTimeout(() => {
       if (!state.started) {
-        state.started = true;
-        activateAct(clampAct(requestedAct), Math.max(0, requestedCue), {
-          immediate: true,
-        });
-        postConsoleStatus();
+        startProjection(clampAct(requestedAct), Math.max(0, requestedCue));
       }
     }, 2600);
+  } else {
+    startButton.disabled = true;
+    intro.hidden = false;
   }
+
+  // Fallback for the setup screen if a frame never announces itself.
+  if (setupMode) setTimeout(enableStartFallback, 7000);
 
   updateLoadStatus();
   updateHud();

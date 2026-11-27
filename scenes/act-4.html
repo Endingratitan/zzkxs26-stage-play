@@ -53,6 +53,7 @@
               <span class="a4-eraser-felt"></span>
             </div>
             <div class="a4-erased-space"></div>
+            <div class="a4-chalk-puff"></div>
             <div class="a4-chalk-dust-stain"></div>
           </div>
         </div>
@@ -70,12 +71,6 @@
           <canvas class="a4-embers" id="emberfield"></canvas>
         </div>
 
-        <div class="a4-paper-pile" aria-hidden="true">
-          <span class="a4-sheet s1"></span>
-          <span class="a4-sheet s2"></span>
-          <span class="a4-sheet s3"></span>
-          <span class="a4-sheet s4"></span>
-        </div>
         <div class="a4-stove-light"></div>
       </div>
 
@@ -112,7 +107,7 @@
   <svg width="0" height="0" class="a4-filters" aria-hidden="true">
     <filter id="a4-chalk">
       <feTurbulence type="fractalNoise" baseFrequency="0.72" numOctaves="2" seed="8" result="noise" />
-      <feDisplacementMap in="SourceGraphic" in2="noise" scale="3.2" xChannelSelector="R" yChannelSelector="G" />
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="5.5" xChannelSelector="R" yChannelSelector="G" />
     </filter>
   </svg>
 

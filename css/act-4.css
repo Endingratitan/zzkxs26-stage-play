@@ -308,20 +308,20 @@ body {
 .a4-data-label {
   position: absolute;
   left: 94px;
-  top: 211px;
-  color: rgba(212, 207, 188, 0.46);
+  top: 213px;
+  color: rgba(221, 212, 190, 0.62);
   font-family: var(--serif);
-  font-size: 15px;
-  letter-spacing: 0.22em;
+  font-size: 24px;
+  letter-spacing: 0.2em;
   filter: url(#a4-chalk);
 }
 .a4-data-note {
   position: absolute;
   left: 95px;
-  top: 237px;
-  color: rgba(212, 207, 188, 0.28);
+  top: 250px;
+  color: rgba(224, 216, 195, 0.68);
   font-family: var(--mono);
-  font-size: 9px;
+  font-size: 18px;
   letter-spacing: 0.15em;
 }
 .a4-smudge {
@@ -341,9 +341,9 @@ body {
   right: 445px;
   bottom: 98px;
   z-index: 4;
-  color: rgba(212, 209, 192, 0.27);
+  color: rgba(220, 216, 198, 0.38);
   font-family: var(--serif);
-  font-size: 13px;
+  font-size: 18px;
   letter-spacing: 0.2em;
   transform: rotate(-1.5deg);
   filter: url(#a4-chalk);
@@ -412,14 +412,14 @@ body {
 
 .a4-eraser {
   position: absolute;
-  right: 82px;
-  top: 336px;
+  right: 68px;
+  top: 320px;
   z-index: 12;
-  width: 230px;
-  height: 79px;
+  width: 266px;
+  height: 91px;
   opacity: 0;
   transform: translate3d(300px, -37px, 0) rotate(7deg);
-  filter: drop-shadow(0 20px 17px rgba(0, 0, 0, 0.42));
+  filter: drop-shadow(0 23px 19px rgba(0, 0, 0, 0.45));
   pointer-events: none;
 }
 .a4-eraser-top {
@@ -467,6 +467,23 @@ body {
   opacity: 0;
   filter: blur(9px);
   transition: opacity 1.4s ease 1.4s;
+}
+.a4-chalk-puff {
+  position: absolute;
+  right: 232px;
+  top: 435px;
+  width: 470px;
+  height: 230px;
+  z-index: 13;
+  pointer-events: none;
+  opacity: 0;
+  background:
+    radial-gradient(ellipse 26% 25% at 24% 62%, rgba(237, 234, 218, 0.32), transparent 72%),
+    radial-gradient(ellipse 22% 33% at 48% 42%, rgba(229, 226, 209, 0.25), transparent 74%),
+    radial-gradient(ellipse 31% 23% at 69% 65%, rgba(237, 234, 218, 0.2), transparent 76%),
+    radial-gradient(ellipse 13% 40% at 82% 33%, rgba(237, 234, 218, 0.15), transparent 78%);
+  filter: blur(12px);
+  transform: rotate(-3deg) translateY(12px);
 }
 .a4-chalk-dust-stain {
   position: absolute;
@@ -735,8 +752,8 @@ body {
   transform: scale(1.045) translate(-24px, -6px);
 }
 .act4.step-1 .a4-number-grid {
-  opacity: 0.24;
-  filter: url(#a4-chalk) blur(0.4px);
+  opacity: 0.37;
+  filter: url(#a4-chalk) blur(0.25px);
 }
 .act4.step-1 .a4-tallies {
   opacity: 0.9;
@@ -822,6 +839,9 @@ body {
 .act4.step-3 .a4-chalk-dust-stain {
   opacity: 1;
 }
+.act4.step-3 .a4-chalk-puff {
+  animation: chalk-puff 4s var(--ease-soft) 0.9s both;
+}
 .act4.step-3 .a4-maxpower {
   opacity: 0.36;
   transition: opacity 1.6s ease 1.1s;
@@ -871,26 +891,49 @@ body {
     opacity: 0.7;
   }
 }
-@keyframes a4-erase-sweep {
+@keyframes chalk-puff {
   0% {
     opacity: 0;
-    transform: translate3d(280px, -48px, 0) rotate(7deg);
+    transform: rotate(-3deg) translate3d(18px, 22px, 0) scale(0.86);
+    filter: blur(18px);
   }
-  12% {
-    opacity: 0.96;
-    transform: translate3d(120px, -25px, 0) rotate(4deg);
-  }
-  46% {
+  18% {
     opacity: 1;
-    transform: translate3d(-160px, 15px, 0) rotate(-5deg);
+    transform: rotate(-3deg) translate3d(0, 0, 0) scale(1);
+    filter: blur(11px);
   }
-  78% {
-    opacity: 0.96;
-    transform: translate3d(-306px, 44px, 0) rotate(-8deg);
+  75% {
+    opacity: 0.34;
+    transform: rotate(-4deg) translate3d(-18px, -19px, 0) scale(1.08);
+    filter: blur(15px);
   }
   100% {
     opacity: 0;
-    transform: translate3d(-390px, 60px, 0) rotate(-9deg);
+    transform: rotate(-5deg) translate3d(-28px, -37px, 0) scale(1.13);
+    filter: blur(19px);
+  }
+}
+
+@keyframes a4-erase-sweep {
+  0% {
+    opacity: 0;
+    transform: translate3d(270px, -44px, 0) rotate(7deg);
+  }
+  12% {
+    opacity: 0.98;
+    transform: translate3d(130px, -23px, 0) rotate(4deg);
+  }
+  48% {
+    opacity: 1;
+    transform: translate3d(-30px, 16px, 0) rotate(-5deg);
+  }
+  80% {
+    opacity: 0.96;
+    transform: translate3d(-100px, 40px, 0) rotate(-8deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(-170px, 56px, 0) rotate(-9deg);
   }
 }
 @keyframes stove-glow {

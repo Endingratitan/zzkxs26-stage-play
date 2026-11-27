@@ -14,14 +14,14 @@
 }
 @font-face {
   font-family: "IBM Plex Mono";
-  src: url("../assets/fonts/subset/IBMPlexMono-Regular.woff2") format("woff2");
+  src: url("../assets/fonts/IBMPlexMono-Regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: block;
 }
 @font-face {
   font-family: "IBM Plex Mono";
-  src: url("../assets/fonts/subset/IBMPlexMono-Medium.woff2") format("woff2");
+  src: url("../assets/fonts/IBMPlexMono-Medium.ttf") format("truetype");
   font-weight: 500;
   font-style: normal;
   font-display: block;
@@ -174,6 +174,12 @@ button {
 }
 
 /* ---------- intro ---------- */
+
+.intro[hidden],
+body.auto-mode .intro,
+body.auto-mode .loading-line {
+  display: none !important;
+}
 
 .intro {
   position: absolute;

@@ -5,7 +5,7 @@
 
 @font-face {
   font-family: "Noto Serif SC";
-  src: url("../assets/fonts/subset/NotoSerifSC.woff2") format("woff2-variations");
+  src: url("../assets/fonts/subset/NotoSerifSC.woff2") format("woff2");
   font-weight: 200 900;
   font-style: normal;
   font-display: block;
@@ -19,14 +19,14 @@
 }
 @font-face {
   font-family: "IBM Plex Mono";
-  src: url("../assets/fonts/subset/IBMPlexMono-Regular.woff2") format("woff2");
+  src: url("../assets/fonts/IBMPlexMono-Regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: block;
 }
 @font-face {
   font-family: "IBM Plex Mono";
-  src: url("../assets/fonts/subset/IBMPlexMono-Medium.woff2") format("woff2");
+  src: url("../assets/fonts/IBMPlexMono-Medium.ttf") format("truetype");
   font-weight: 500;
   font-style: normal;
   font-display: block;
@@ -355,20 +355,7 @@ a {
 }
 
 .scene-footer {
-  position: absolute;
-  left: 100px;
-  right: 100px;
-  bottom: 56px;
-  z-index: 42;
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 30px;
-  pointer-events: none;
-  font-family: var(--mono);
-  font-size: 12px;
-  letter-spacing: 0.18em;
-  color: rgba(232, 225, 211, 0.32);
+  display: none;
 }
 
 /* ---------- paper ---------- */

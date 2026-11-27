@@ -21,6 +21,7 @@
 
   function fitStage(stage) {
     const scale = Math.min(window.innerWidth / DESIGN.width, window.innerHeight / DESIGN.height);
+    stage.style.setProperty("--stage-scale", String(scale));
     stage.style.transform = `translate(-50%, -50%) scale(${scale})`;
   }
 

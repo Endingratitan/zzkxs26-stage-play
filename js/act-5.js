@@ -5,6 +5,34 @@
   const dustCanvas = document.getElementById("dustfield");
   const endingDustCanvas = document.getElementById("endingDust");
 
+  let endingDust = null;
+  let nameDustTimer = null;
+
+  function scheduleNameDust() {
+    clearTimeout(nameDustTimer);
+    nameDustTimer = setTimeout(() => {
+      if (!endingDust || !scene.classList.contains("step-5")) return;
+      const spots = [
+        [770, 545],
+        [900, 515],
+        [1040, 560],
+        [1155, 520],
+      ];
+      spots.forEach(([x, y], index) => {
+        setTimeout(() => {
+          if (!scene.classList.contains("step-5")) return;
+          endingDust.burst(x, y, 28, {
+            color: "rgba(226,218,201,0.48)",
+            speed: 1.2 + index * 0.12,
+            gravity: -0.006,
+            life: 110,
+            size: 1.5,
+          });
+        }, index * 180);
+      });
+    }, 3600);
+  }
+
   const api = SceneCore.init({
     act: 5,
     title: "署名",
@@ -21,6 +49,8 @@
       for (let i = 1; i <= 5; i++) {
         scene.classList.toggle(`step-${i}`, n >= i);
       }
+      if (n === 5 && endingDust) scheduleNameDust();
+      if (n !== 5) clearTimeout(nameDustTimer);
     },
   });
 
@@ -36,7 +66,7 @@
     wind: 0.018,
     alpha: 0.58,
   });
-  const endingDust = new SceneCore.ParticleField(endingDustCanvas, {
+  endingDust = new SceneCore.ParticleField(endingDustCanvas, {
     type: "dust",
     count: 36,
     color: "rgba(224,215,197,0.38)",
@@ -48,4 +78,6 @@
   });
   api.addParticles(dust);
   api.addParticles(endingDust);
+
+  if (api.state.cue === 5) scheduleNameDust();
 })();

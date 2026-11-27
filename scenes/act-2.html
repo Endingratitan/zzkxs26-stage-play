@@ -26,11 +26,6 @@
         <div class="a2-lightshaft"></div>
         <div class="a2-wall-shadow"></div>
         <div class="a2-tabletop"></div>
-        <div class="a2-cup">
-          <span class="a2-cup-handle"></span>
-          <span class="a2-cup-steam"></span>
-        </div>
-        <div class="a2-desk-papers"></div>
       </div>
 
       <div class="a2-broadcast">
@@ -118,6 +113,13 @@
       <div class="film-edge"></div>
     </main>
   </div>
+
+  <svg width="0" height="0" aria-hidden="true">
+    <filter id="a2-stamp-rough">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035 0.09" numOctaves="2" seed="17" result="noise" />
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="5" xChannelSelector="R" yChannelSelector="G" />
+    </filter>
+  </svg>
 
   <script src="../js/scene-core.js"></script>
   <script src="../js/act-2.js"></script>

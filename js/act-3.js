@@ -30,30 +30,74 @@
 
   function buildSignatures() {
     const rnd = seeded(19591206);
+    const names = [
+      "周光召", "王平", "李明", "张远", "刘青", "陈川", "杨帆", "赵林",
+      "黄海", "吴声", "徐行", "孙明", "胡安", "朱光", "高远", "林平",
+      "何山", "郭川", "马青", "罗闻",
+    ];
     const cols = 5;
     const rows = 4;
     const cellW = 820 / cols;
     const cellH = 156 / rows;
     let markup = "";
+    let nameIndex = 0;
+
     for (let row = 0; row < rows; row++) {
       for (let col = 0; col < cols; col++) {
-        const x = col * cellW + 16 + rnd() * 28;
-        const y = row * cellH + 29 + rnd() * 9;
-        const width = cellW * (0.43 + rnd() * 0.28);
-        const h = 10 + rnd() * 12;
-        const shape = Math.floor(rnd() * 4);
-        const tilt = (rnd() - 0.5) * 10;
-        let d = "";
-        if (shape === 0) {
-          d = `M ${x.toFixed(1)} ${y.toFixed(1)} c ${(width * 0.06).toFixed(1)} ${(-h * 1.25).toFixed(1)}, ${(width * 0.21).toFixed(1)} ${(-h * 0.75).toFixed(1)}, ${(width * 0.31).toFixed(1)} ${(-h * 0.06).toFixed(1)} c ${(width * 0.08).toFixed(1)} ${(h * 0.62).toFixed(1)}, ${(width * 0.17).toFixed(1)} ${(h * 0.75).toFixed(1)}, ${(width * 0.27).toFixed(1)} ${(h * 0.15).toFixed(1)} c ${(width * 0.09).toFixed(1)} ${(-h * 0.74).toFixed(1)}, ${(width * 0.22).toFixed(1)} ${(-h * 0.7).toFixed(1)}, ${(width * 0.28).toFixed(1)} ${(-h * 0.02).toFixed(1)} c ${(width * 0.05).toFixed(1)} ${(h * 0.42).toFixed(1)}, ${(width * 0.11).toFixed(1)} ${(h * 0.48).toFixed(1)}, ${(width * 0.18).toFixed(1)} ${(h * 0.1).toFixed(1)}`;
-        } else if (shape === 1) {
-          d = `M ${x.toFixed(1)} ${(y + 1).toFixed(1)} q ${(width * 0.06).toFixed(1)} ${(-h * 1.8).toFixed(1)}, ${(width * 0.14).toFixed(1)} ${(-h * 0.3).toFixed(1)} q ${(width * 0.06).toFixed(1)} ${(h * 1.1).toFixed(1)}, ${(width * 0.15).toFixed(1)} ${(-h * 0.12).toFixed(1)} q ${(width * 0.08).toFixed(1)} ${(-h * 0.9).toFixed(1)}, ${(width * 0.17).toFixed(1)} ${(h * 0.22).toFixed(1)} q ${(width * 0.04).toFixed(1)} ${(h * 0.65).toFixed(1)}, ${(width * 0.2).toFixed(1)} ${(h * 0.55).toFixed(1)} t ${(width * 0.19).toFixed(1)} ${(h * 0.1).toFixed(1)} m ${(-width * 0.47).toFixed(1)} ${(h * 1.65).toFixed(1)} h ${(width * 0.54).toFixed(1)}`;
-        } else if (shape === 2) {
-          d = `M ${x.toFixed(1)} ${y.toFixed(1)} c ${(width * 0.1).toFixed(1)} ${(-h * 1.35).toFixed(1)}, ${(width * 0.3).toFixed(1)} ${(-h * 1.1).toFixed(1)}, ${(width * 0.25).toFixed(1)} ${(-h * 0.1).toFixed(1)} c ${(-width * 0.03).toFixed(1)} ${(h * 0.8).toFixed(1)}, ${(-width * 0.22).toFixed(1)} ${(h * 0.8).toFixed(1)}, ${(-width * 0.28).toFixed(1)} ${(h * 0.07).toFixed(1)} m ${(width * 0.3).toFixed(1)} ${(-h * 0.45).toFixed(1)} c ${(width * 0.08).toFixed(1)} ${(-h * 0.8).toFixed(1)}, ${(width * 0.24).toFixed(1)} ${(-h * 0.5).toFixed(1)}, ${(width * 0.3).toFixed(1)} ${(h * 0.1).toFixed(1)} c ${(width * 0.04).toFixed(1)} ${(h * 0.5).toFixed(1)}, ${(width * 0.18).toFixed(1)} ${(h * 0.9).toFixed(1)}, ${(width * 0.18).toFixed(1)} ${(h * 0.1).toFixed(1)}`;
-        } else {
-          d = `M ${x.toFixed(1)} ${y.toFixed(1)} c ${(width * 0.12).toFixed(1)} ${(-h * 1.15).toFixed(1)}, ${(width * 0.24).toFixed(1)} ${(h * 0.3).toFixed(1)}, ${(width * 0.4).toFixed(1)} ${(-h * 0.25).toFixed(1)} c ${(width * 0.08).toFixed(1)} ${(-h * 0.35).toFixed(1)}, ${(width * 0.16).toFixed(1)} ${(-h * 0.18).toFixed(1)}, ${(width * 0.19).toFixed(1)} ${(h * 0.55).toFixed(1)} l ${(width * 0.07).toFixed(1)} ${(-h * 1.25).toFixed(1)} m ${(-width * 0.5).toFixed(1)} ${(h * 1.3).toFixed(1)} l ${(width * 0.3).toFixed(1)} ${(h * 0.5).toFixed(1)}`;
+        const delay = (row * 0.13 + col * 0.065 + rnd() * 0.16).toFixed(2);
+        const x = col * cellW + 13 + rnd() * 17;
+        const y = row * cellH + 30 + rnd() * 5;
+        const tilt = (rnd() - 0.5) * 9;
+        const isFirst = row === 0 && col === 0;
+        const drawOnly = !isFirst && rnd() < 0.22;
+        let content = "";
+
+        if (!drawOnly) {
+          const name = names[nameIndex % names.length];
+          nameIndex += 1;
+          const size = isFirst ? 34 : 30 + rnd() * 10;
+          const nameClass = isFirst ? "sig-name sig-first" : "sig-name";
+          content += `<text class="${nameClass}" x="${x.toFixed(1)}" y="${y.toFixed(1)}" font-size="${size.toFixed(1)}">${name}</text>`;
         }
-        markup += `<path class="sig-path" pathLength="1" d="${d}" transform="rotate(${tilt.toFixed(1)} ${x.toFixed(1)} ${y.toFixed(1)})" style="animation-delay:${(row * 0.14 + col * 0.075 + rnd() * 0.26).toFixed(2)}s"></path>`;
+
+        const hasFlourish = isFirst || drawOnly || rnd() > 0.22;
+        if (hasFlourish) {
+          const flourishX = x + (drawOnly ? 4 : 52 + rnd() * 30);
+          const fy = y - 3 + rnd() * 5;
+          const fw = drawOnly ? 92 + rnd() * 38 : 38 + rnd() * 48;
+          const fh = 8 + rnd() * 14;
+          const style = Math.floor(rnd() * 4);
+          let d;
+          if (style === 0) {
+            d = [
+              `M ${flourishX.toFixed(1)} ${fy.toFixed(1)}`,
+              `q ${(fw * 0.2).toFixed(1)} ${(-fh * 1.15).toFixed(1)}, ${(fw * 0.36).toFixed(1)} ${(-fh * 0.18).toFixed(1)}`,
+              `q ${(fw * 0.18).toFixed(1)} ${(fh * 0.85).toFixed(1)}, ${(fw * 0.38).toFixed(1)} ${(fh * 0.42).toFixed(1)}`,
+              `t ${(fw * 0.34).toFixed(1)} ${(-fh * 0.35).toFixed(1)}`,
+            ].join(" ");
+          } else if (style === 1) {
+            d = [
+              `M ${flourishX.toFixed(1)} ${(fy + 1).toFixed(1)}`,
+              `q ${(fw * 0.24).toFixed(1)} ${(-fh * 0.3).toFixed(1)}, ${(fw * 0.48).toFixed(1)} ${(fh * 0.15).toFixed(1)}`,
+              `l ${(fw * 0.32).toFixed(1)} ${(fh * 0.2).toFixed(1)}`,
+            ].join(" ");
+          } else if (style === 2) {
+            d = [
+              `M ${flourishX.toFixed(1)} ${fy.toFixed(1)}`,
+              `c ${(fw * 0.2).toFixed(1)} ${(-fh * 1.5).toFixed(1)}, ${(fw * 0.5).toFixed(1)} ${(-fh * 0.2).toFixed(1)}, ${(fw * 0.58).toFixed(1)} ${(fh * 0.75).toFixed(1)}`,
+              `q ${(-fw * 0.18).toFixed(1)} ${(-fh * 0.2).toFixed(1)}, ${(-fw * 0.06).toFixed(1)} ${(fh * 0.25).toFixed(1)}`,
+            ].join(" ");
+          } else {
+            d = [
+              `M ${flourishX.toFixed(1)} ${(fy - 3).toFixed(1)}`,
+              `c ${(fw * 0.1).toFixed(1)} ${(-fh * 0.7).toFixed(1)}, ${(fw * 0.25).toFixed(1)} ${(fh * 0.5).toFixed(1)}, ${(fw * 0.4).toFixed(1)} ${(fh * 0.05).toFixed(1)}`,
+              `m ${(-fw * 0.36).toFixed(1)} ${(fh * 1.15).toFixed(1)} h ${(fw * 0.52).toFixed(1)}`,
+            ].join(" ");
+          }
+          content += `<path class="sig-path" pathLength="1" d="${d}"></path>`;
+        }
+
+        markup += `<g class="sig-item" transform="rotate(${tilt.toFixed(1)} ${x.toFixed(1)} ${y.toFixed(1)})" style="--d:${delay}s;animation-delay:${delay}s">${content}</g>`;
       }
     }
     signatures.innerHTML = markup;
